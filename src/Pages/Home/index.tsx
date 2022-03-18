@@ -1,4 +1,5 @@
-import { Grid, GridItem, Img, Flex, Box, Spacer, Button, Avatar} from '@chakra-ui/react'
+import { Grid, GridItem, Img, Flex, Box, Spacer, Button, Avatar, Text, Wrap, WrapItem} from '@chakra-ui/react'
+import Filters from '../../Components/Filters';
 
 
 function App() {
@@ -43,8 +44,14 @@ function App() {
           marginRight='1rem'
           >
           </Box>
-          
 
+          <Box 
+          h='2.5rem'
+          w='2.5rem'
+          marginTop='0.8rem'
+          marginRight='1rem'
+          >
+          </Box>
         </Flex>
         
       </GridItem>
@@ -62,16 +69,26 @@ function App() {
           bg="gray.300"
           h='100%'
           >
+            <Text 
+            fontWeight='bold' 
+            fontFamily='Rounded Mplus 1c' 
+            fontSize={25} 
+            marginLeft={1}
+            >Filters</Text>
+
+            <Filters/>
           </Box>
 
-          <Box 
+          <Wrap
           flex={3}
           h='100%'
           overflowY='scroll'
-
+          overflowX='hidden'
+          justify='flex-start'
+          paddingLeft='1rem'
           >
           
-          </Box>
+          </Wrap>
         </Flex>
       </GridItem>
     </Grid>
