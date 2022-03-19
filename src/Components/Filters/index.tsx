@@ -1,4 +1,13 @@
-import {VStack, Switch, Wrap, WrapItem, Center, Text, Spacer} from '@chakra-ui/react'
+import {
+  VStack, 
+  Switch, 
+  Wrap, 
+  WrapItem, 
+  Center, 
+  Text, 
+  Spacer, 
+  Box
+} from '@chakra-ui/react'
 
 function Filters() {
 
@@ -38,6 +47,17 @@ function Filters() {
   
 
   return (
+      <Box 
+      w='25%'
+      bg="gray.300"
+      h='100%'>
+        <Text 
+        fontWeight='bold' 
+        fontFamily='Rounded Mplus 1c' 
+        fontSize={25} 
+        marginLeft={1}
+        >Filters</Text>
+        
         <VStack
         borderRadius='md'
         >
@@ -93,6 +113,8 @@ function Filters() {
             </Wrap>
             <Spacer/>
         </VStack>
+        </Box>
+      
   );
 }
 

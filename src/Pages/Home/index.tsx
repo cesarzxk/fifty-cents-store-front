@@ -1,98 +1,91 @@
-import { Grid, GridItem, Img, Flex, Box, Spacer, Button, Avatar, Text, Wrap, WrapItem} from '@chakra-ui/react'
-import Filters from '../../Components/Filters';
+
+import { Box, Wrap, WrapItem} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import ItemCard from '../../Components/ItemCard';
 
 
-function App() {
+
+function Home() {
+  const items = [
+    {
+      hasDiscount: true,
+      name: 'Rear view of modern home with pool',
+      images: ['https://bit.ly/2Z4KKcF'],
+      description: 'Modern home in city center in the heart of historic Los Angeles',
+      price: '$1,900.00',
+      discountValue:'0.05',
+      material: 'concrete',
+      category: 'Fantastic',
+      id: '1',
+      locale:'brazilian'
+    },
+    {
+      hasDiscount: true,
+      name: 'Rear view of modern home with pool',
+      images: ['https://bit.ly/2Z4KKcF'],
+      description: 'Modern home in city center in the heart of historic Los Angeles',
+      price: '$1,900.00',
+      discountValue:'0.05',
+      material: 'concrete',
+      category: 'Fantastic',
+      id: '1',
+      locale:'brazilian'
+    },
+    {
+      hasDiscount: true,
+      name: 'Rear view of modern home with pool',
+      images: ['https://bit.ly/2Z4KKcF'],
+      description: 'Modern home in city center in the heart of historic Los Angeles',
+      price: '$1,900.00',
+      discountValue:'0.05',
+      material: 'concrete',
+      category: 'Fantastic',
+      id: '1',
+      locale:'brazilian'
+    },
+    {
+      hasDiscount: false,
+      name: 'Rear view of modern home with pool',
+      images: ['https://bit.ly/2Z4KKcF'],
+      description: 'Modern home in city center in the heart of historic Los Angeles',
+      price: '$1,900.00',
+      discountValue:'0.05',
+      material: 'concrete',
+      category: 'Fantastic',
+      id: '1',
+      locale:'brazilian'
+    }
+
+  ]
+
   return (
-    <Grid 
-    templateColumns='1fr'
-    h='100vh'
-    w='100vw'
-    alignItems='center'
-    display='flex'
-    flexDirection='column'
+    <Box 
+    flex={4}
+    height='100%'
     >
-      <GridItem 
-      bg="gray.300" 
-      w='70%' 
-      h='12rem'
-      marginY='1rem'
+      <Wrap
+      overflowY='scroll'
+      overflowX='hidden'
+      justify='flex-start'
+      paddingLeft='1rem'
+      height='100%'
       >
-        <Flex>
-          <Box>
-            <Img 
-            h='11rem' 
-            src='./logo.svg'
-            marginLeft='1rem'
-            /> 
-          </Box>
-
-          <Spacer/>
-          
-          <Box 
-          display='flex' 
-          flexDirection='row'
-          marginTop='1rem'
-          marginRight='1rem'
-          >
-          </Box>
-
-          <Box 
-          h='2.5rem'
-          w='2.5rem'
-          marginTop='0.8rem'
-          marginRight='1rem'
-          >
-          </Box>
-
-          <Box 
-          h='2.5rem'
-          w='2.5rem'
-          marginTop='0.8rem'
-          marginRight='1rem'
-          >
-          </Box>
-        </Flex>
-        
-      </GridItem>
-
-      <GridItem 
-      h='100%'
-      w='70%'>
-
-        <Flex 
-        flexDirection='row'
-        h='100%'
-        >
-          <Box 
-          flex={1}
-          bg="gray.300"
-          h='100%'
-          >
-            <Text 
-            fontWeight='bold' 
-            fontFamily='Rounded Mplus 1c' 
-            fontSize={25} 
-            marginLeft={1}
-            >Filters</Text>
-
-            <Filters/>
-          </Box>
-
-          <Wrap
-          flex={3}
-          h='100%'
-          overflowY='scroll'
-          overflowX='hidden'
-          justify='flex-start'
-          paddingLeft='1rem'
-          >
-          
-          </Wrap>
-        </Flex>
-      </GridItem>
-    </Grid>
+      
+      {
+        items.map(
+          item=>
+          <Link to={`/${item.id}-${item.locale}`}>
+            <WrapItem>
+              <ItemCard property={item}/>
+            </WrapItem>
+          </Link>
+        )
+      }
+    
+      
+      </Wrap>
+    </Box>
   );
 }
 
-export default App;
+export default Home;
