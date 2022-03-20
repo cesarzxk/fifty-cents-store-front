@@ -53,7 +53,7 @@ function Filters() {
       h='100%'>
         <Text 
         fontWeight='bold' 
-        fontFamily='Rounded Mplus 1c' 
+        fontFamily='M PLUS Rounded 1c' 
         fontSize={25} 
         marginLeft={1}
         >Filters</Text>

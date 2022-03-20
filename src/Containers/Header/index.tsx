@@ -6,8 +6,8 @@ import {
     Spacer
 } from '@chakra-ui/react'
 import Search from '../../Components/Search';
-import Cart from '../../Components/Cart';
-import User from '../../Components/User';
+import Cart from '../Cart';
+import User from '../User';
 
 
 function Header(){
@@ -18,13 +18,13 @@ function Header(){
       <GridItem 
       bg="gray.300" 
       w='70%' 
-      h='12rem'
+      h='5rem'
       marginY='1rem'
       >
         <Flex>
           <Box>
             <Img 
-            h='11rem' 
+            h='5rem' 
             src='./logo.svg'
             marginLeft='1rem'
             /> 
