@@ -4,6 +4,9 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {MdAddShoppingCart, MdArrowBack} from 'react-icons/md'
 
+import {useLinkClickHandler} from 'react-router-dom';
+
+
 function Item() {
   const item = {
       hasDiscount: true,
@@ -23,7 +26,7 @@ function Item() {
     overflowY='scroll'
     paddingLeft='1rem'
     height='100%'
-    w='80%'
+    flex={4}
     >
       <Wrap
       justify='center'
@@ -48,6 +51,7 @@ function Item() {
           height='100%' 
           borderRadius={0}
           colorScheme='yellow'
+          onClick={useLinkClickHandler('/home')}
           icon={
             <MdArrowBack/>
           }/>
@@ -159,12 +163,7 @@ function Item() {
             fontFamily='Rounded Mplus 1c' 
             >{item.description}</Text>
           </Box>
-
         </WrapItem>
-        
-
-
-        
         </Wrap>
     </Box>
   );

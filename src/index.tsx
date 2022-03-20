@@ -1,20 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import App from './Pages/Home';
-import Item from './Pages/Item';
-
 import reportWebVitals from './reportWebVitals';
-import { ChakraProvider, Flex, Grid } from "@chakra-ui/react"
-
-import Filters from './Components/Filters';
-import Header from './Components/Header';
-
+import { ChakraProvider, Grid } from "@chakra-ui/react"
+import styled from "@emotion/styled";
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
+import App from './Pages';
+
+import Header from './Containers/Header';
+
+const AppContainer = styled.div`
+  font-family: "M PLUS Rounded 1c";
+`;
 
 ReactDOM.render(
   <ChakraProvider>
+    <AppContainer>
     <React.StrictMode>
     <Grid 
     templateColumns='1fr'
@@ -25,23 +26,15 @@ ReactDOM.render(
     flexDirection='column'
     >
       <Header/>
-      <Flex 
-        display='flex'
-        flexDirection='row'
-        height='100%'
-        w='70%'
-      >
-        <Filters/>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<App/>}/>
-            <Route path="/:slug" element={<Item/>} />
-          </Routes>
-        </BrowserRouter>
-      </Flex>
+      <BrowserRouter>
+        <Routes location='/home'>
+          <Route path='/home' element={<App/>}/>
+        </Routes>
+      </BrowserRouter>
     </Grid>
 
     </React.StrictMode>
+    </AppContainer>
   </ChakraProvider>,
   document.getElementById('root')
 );

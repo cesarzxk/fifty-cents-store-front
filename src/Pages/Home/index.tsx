@@ -74,7 +74,7 @@ function Home() {
       {
         items.map(
           item=>
-          <Link to={`/${item.id}-${item.locale}`}>
+          <Link to={`/home/${item.id}-${item.locale}`}>
             <WrapItem>
               <ItemCard property={item}/>
             </WrapItem>
