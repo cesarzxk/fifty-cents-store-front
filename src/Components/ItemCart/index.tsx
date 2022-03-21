@@ -1,27 +1,21 @@
 import { 
-    Box, 
-    Button, 
     GridItem, 
-    HStack, 
     IconButton, 
     NumberDecrementStepper, 
     NumberIncrementStepper, 
     NumberInput, 
     NumberInputField, 
     NumberInputStepper, 
-    Spacer, 
-    Text} from "@chakra-ui/react";
+    } from "@chakra-ui/react";
 
 import { FaTrash } from 'react-icons/fa'
-
-import { FunctionTypeNode } from "typescript";
 
 interface propertiesType{
     name:string;
     locale: string;
     price: number;
     quantity:number;
-            
+    productId:string;  
 }
 
 
@@ -39,7 +33,6 @@ function ItemCart({properties, remove, index, setQuantity}:{
         flex={4}
         >{properties.name}</GridItem>
 
-        
         <GridItem
         >
             <NumberInput size='xs' 

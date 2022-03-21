@@ -3,15 +3,14 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider, Grid } from "@chakra-ui/react"
 import styled from "@emotion/styled";
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 
 import App from './Pages';
-
-import Header from './Containers/Header';
 
 const AppContainer = styled.div`
   font-family: "M PLUS Rounded 1c";
 `;
+
 
 ReactDOM.render(
   <ChakraProvider>
@@ -25,11 +24,8 @@ ReactDOM.render(
     display='flex'
     flexDirection='column'
     >
-      <Header/>
       <BrowserRouter>
-        <Routes location='/home'>
-          <Route path='/home' element={<App/>}/>
-        </Routes>
+        <App/>
       </BrowserRouter>
     </Grid>
 
