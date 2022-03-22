@@ -15,21 +15,14 @@ const AppContainer = styled.div`
 ReactDOM.render(
   <ChakraProvider>
     <AppContainer>
-    <React.StrictMode>
-    <Grid 
-    templateColumns='1fr'
-    h='100vh'
-    w='100vw'
-    alignItems='center'
-    display='flex'
-    flexDirection='column'
-    >
-      <BrowserRouter>
-        <App/>
-      </BrowserRouter>
-    </Grid>
+      
+        <BrowserRouter>
 
-    </React.StrictMode>
+              <React.StrictMode>
+                  <App/>
+              </React.StrictMode>
+
+        </BrowserRouter>
     </AppContainer>
   </ChakraProvider>,
   document.getElementById('root')
