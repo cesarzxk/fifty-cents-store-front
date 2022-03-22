@@ -6,6 +6,8 @@ import styled from "@emotion/styled";
 import {BrowserRouter} from 'react-router-dom';
 
 import App from './Pages';
+import { AuthProvider } from './Context/Auth/AuthContext';
+import { CookiesProvider } from 'react-cookie';
 
 const AppContainer = styled.div`
   font-family: "M PLUS Rounded 1c";
@@ -16,13 +18,17 @@ ReactDOM.render(
   <ChakraProvider>
     <AppContainer>
       
+      <CookiesProvider>
         <BrowserRouter>
+          <AuthProvider>
 
               <React.StrictMode>
                   <App/>
               </React.StrictMode>
 
+          </AuthProvider>
         </BrowserRouter>
+      </CookiesProvider>
     </AppContainer>
   </ChakraProvider>,
   document.getElementById('root')

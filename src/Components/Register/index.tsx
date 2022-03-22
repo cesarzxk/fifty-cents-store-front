@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 
 import { useState } from "react";
+import Warnning from "../Warnning";
 
 
 interface accountType {
@@ -17,16 +18,18 @@ interface accountType {
     name:string,
     lastname:string,
     email:string,
+}
+
+
     
-    }
 
-
-export default function Login(){
+export default function Register({onSubmit}:{onSubmit:(user:accountType) => Promise<number>,}){
     const [name, setName] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [repeatedPassword, setRepeatedPassword] = useState('');
+    const [status, setStatus] = useState(0);
 
     const [nameIsNull, setNameIsNull]= useState(false);
     const [lastnameIsNull, setLastnameIsNull] = useState(false);
@@ -37,27 +40,30 @@ export default function Login(){
     const [haveError, sethaveError] = useState(false);
 
 
-    function handlerSubmit(e: React.FormEvent){
+    async function handlerSubmit(e: React.FormEvent){
         e.preventDefault()
-
-        name=='' ? setNameIsNull(true):setNameIsNull(false)
-        lastname=='' ? setLastnameIsNull(true): setLastnameIsNull(false)
-        email=='' ? setEmailIsNull(true): setEmailIsNull(false)
-        password=='' ?setPasswordIsNull(true): setPasswordIsNull(false)
-        repeatedPassword=='' ?setRepeatedPasswordIsNull(true): setRepeatedPasswordIsNull(false)
+        name==='' ? setNameIsNull(true):setNameIsNull(false)
+        lastname==='' ? setLastnameIsNull(true): setLastnameIsNull(false)
+        email==='' ? setEmailIsNull(true): setEmailIsNull(false)
+        password==='' ?setPasswordIsNull(true): setPasswordIsNull(false)
+        repeatedPassword==='' ?setRepeatedPasswordIsNull(true): setRepeatedPasswordIsNull(false)
 
         if(
-            nameIsNull==false &&
-            lastnameIsNull==false&&
-            emailIsNull==false&&
-            passwordIsNull==false&&
-            repeatedPasswordIsNull==false
+            nameIsNull===false &&
+            lastnameIsNull===false&&
+            emailIsNull===false&&
+            passwordIsNull===false&&
+            repeatedPasswordIsNull===false
         ){
             sethaveError(false)
-            
-
-
-
+            const result = await onSubmit({
+                    email:email,
+                    lastname:lastname,
+                    name:name,
+                    password:password
+                })
+            setStatus(result)
+                
 
         }else{
             sethaveError(true)
@@ -65,6 +71,9 @@ export default function Login(){
     }
 
     return(
+        <>
+        <Warnning status={status} setStatus={setStatus}/>
+        
         <PopoverBody >
             <form onSubmit={(e)=>handlerSubmit(e)}>
                 <FormControl isInvalid={haveError}>
@@ -184,5 +193,6 @@ export default function Login(){
                 </FormControl>
             </form>
         </PopoverBody>
+    </>
     );
 }

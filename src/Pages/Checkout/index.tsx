@@ -7,9 +7,13 @@ import {
     AlertDescription
   
   } from '@chakra-ui/react';
+import { useEffect, useLayoutEffect, useState } from 'react';
   
+  import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { useGlobal } from '../../Context/Global/GlobalContext';
  
   function Checkout() {
+      const {setOrder, setItemsCart} = useGlobal()
       const [status, setStatus] = useState(0)
 
       useEffect(()=>{
