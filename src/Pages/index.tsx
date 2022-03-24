@@ -9,15 +9,16 @@ import Home from './Home';
 
 import Header from '../Containers/Header';
 import Orders from '../Pages/Orders';
+import Checkout from './Checkout';
 
 export default function Pages(){
     
     return(
         <Routes location="">
             <Route element={<Layout/>} path="">
-                <Route path='order' element={<Orders/>}/>
+                <Route path='orders' element={<Orders/>}/>
+                <Route path='checkout' element={<Checkout/>}/>
                 <Route element={<LayoutFilter/>} path="">
-                    <Route  path="*" element={<Home/>}/>
                     <Route  path="/" element={<Home/>}/>
                     <Route  path="home/:slug" element={<Item/>} />
                 </Route>
@@ -43,12 +44,13 @@ function Layout(){
         )
 }
 
+
 function LayoutFilter(){
     return(
         <Flex 
             display='flex'
             flexDirection='row'
-            height='100%'
+            height='85.5%'
             w='70%'
         >
             <Filters/>   

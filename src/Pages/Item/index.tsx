@@ -1,26 +1,48 @@
 
-import { Box, Circle, Flex, Grid, GridItem, IconButton, Image, Spacer, Text, Wrap, WrapItem} from '@chakra-ui/react';
+import { 
+  Box, 
+  Circle, 
+  Flex, 
+  Grid, 
+  GridItem, 
+  IconButton, 
+  Image, 
+  Spacer, 
+  Text, 
+  Wrap, 
+  WrapItem
+} from '@chakra-ui/react';
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {MdAddShoppingCart, MdArrowBack} from 'react-icons/md'
-
-import {useLinkClickHandler} from 'react-router-dom';
+import {useLinkClickHandler, useParams} from 'react-router-dom';
+import { useGlobal } from '../../Context/Global/GlobalContext';
+import { useEffect, useState } from 'react';
 
 
 function Item() {
-  const item = {
-      hasDiscount: true,
-      name: 'Rear view of modern home with pool',
-      images: ['https://bit.ly/2Z4KKcF', 'https://bit.ly/2Z4KKcF'],
-      description: 'Modern home in city center in the heart of historic Los Angeles',
-      price: '$1,900.00',
-      discountValue:'0.05',
-      material: 'concrete',
-      category: 'Fantastic',
-      id: '1',
-      locale:'brazilian'
-    }
+  
+  let { slug } = useParams<"slug">();
+  const {getItem, addItemtoCart} = useGlobal()
+  const [item, setItem] = useState<any>({})
 
+  useEffect(()=>{
+    onload()
+  },
+    [])
+
+
+  async function onload() {
+    if(slug){
+        const [id, locale] = slug.split("-")
+        console.log(id)
+        const data = await getItem(locale, id)
+        setItem(data)
+        console.log(item)
+    }
+  }
+
+  
   return (
     <Box 
     overflowY='scroll'
@@ -51,11 +73,11 @@ function Item() {
           height='100%' 
           borderRadius={0}
           colorScheme='yellow'
-          onClick={useLinkClickHandler('/home')}
+          onClick={useLinkClickHandler('/')}
           icon={
             <MdArrowBack/>
           }/>
-          
+          1
 
           <Text
           fontSize='30px'
@@ -64,7 +86,7 @@ function Item() {
           fontFamily='Rounded Mplus 1c' 
           bg='WindowFrame'
           flex={1}
-          >{item.name}</Text>
+          >{item?.name}</Text>
         </Flex>
 
 
@@ -77,7 +99,7 @@ function Item() {
           infiniteLoop
           >
             {
-            item.images.map((image:string) => {
+            item.images?.map((image:string) => {
               return <Image src={image}/>;
             })
             }
@@ -88,7 +110,7 @@ function Item() {
                 <Image 
                 position='absolute'
                 maxH='5rem' 
-                src='./sale.png'/>
+                src='/sale.png'/>
           }
 
           <Flex 
@@ -99,13 +121,13 @@ function Item() {
           >
             <Grid gridTemplateColumns='1fr 1fr'>
               <GridItem><Text>Cod:</Text></GridItem>
-              <GridItem><Text fontFamily='Rounded Mplus 1c'>{item.id + '-' + item.locale}</Text></GridItem>
+              <GridItem><Text fontFamily='Rounded Mplus 1c'>{item?.id + '-' + item?.locale}</Text></GridItem>
 
               <GridItem><Text fontFamily='Rounded Mplus 1c' >Categoria:</Text></GridItem>
-              <GridItem><Text fontFamily='Rounded Mplus 1c' >{item.category}:</Text></GridItem>
+              <GridItem><Text fontFamily='Rounded Mplus 1c' >{item?.category}</Text></GridItem>
 
               <GridItem><Text fontFamily='Rounded Mplus 1c' >Material:</Text></GridItem>
-              <GridItem><Text fontFamily='Rounded Mplus 1c' >{item.material}</Text></GridItem>
+              <GridItem><Text fontFamily='Rounded Mplus 1c' >{item?.material}</Text></GridItem>
             </Grid>
 
             <Flex
@@ -115,10 +137,10 @@ function Item() {
               fontWeight='bold'
               fontSize='25px'
               fontFamily='Rounded Mplus 1c' 
-              >{item.price}</Text>
+              >{item?.price}</Text>
             
               {
-                item.hasDiscount&&
+                item?.hasDiscount&&
                   <Circle
                   bg='red'
                   borderRadius='20px'
@@ -126,7 +148,7 @@ function Item() {
                   size='22px'
                   fontSize='12px'
                   fontFamily='Rounded Mplus 1c' 
-                  >-{parseInt(item.discountValue)*100}%</Circle>
+                  >-{parseInt(item?.discountValue)*100}%</Circle>
               }
 
             </Flex>
@@ -138,6 +160,15 @@ function Item() {
             colorScheme={item.hasDiscount?'red':'yellow'}
             color={item.hasDiscount?'white':'black'}
             h='3.5rem'
+            onClick={()=>{
+              addItemtoCart({
+                locale: item.locale,
+                name:item.name,
+                price: parseFloat(item.price), 
+                productId:item.id,
+                quantity:1,
+              })
+            }}
             icon={
             <>
               <Text
@@ -161,7 +192,7 @@ function Item() {
 
             <Text
             fontFamily='Rounded Mplus 1c' 
-            >{item.description}</Text>
+            >{item?.description}</Text>
           </Box>
         </WrapItem>
         </Wrap>

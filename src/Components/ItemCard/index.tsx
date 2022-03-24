@@ -53,7 +53,7 @@ function ItemCard({property}:{property:item}) {
           </Box>
   
           <Box>
-            {property.price}
+            R${property.price}
             <Box as='span' color='gray.600' fontSize='sm'>
               /u
             </Box>

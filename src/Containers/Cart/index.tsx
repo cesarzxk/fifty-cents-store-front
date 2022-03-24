@@ -12,170 +12,66 @@ import {
     DrawerContent,
     useDisclosure,
     DrawerCloseButton,
-    Circle
+    Circle,
+    HStack,
+    Spacer
 } from '@chakra-ui/react';
 
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {MdOutlineShoppingCart} from 'react-icons/md';
 import ItemCart from '../../Components/ItemCart';
+import { useGlobal } from '../../Context/Global/GlobalContext';
+import {useNavigate} from 'react-router-dom';
+
 
 type itemType = {
-    productId:number,
+    name:string,
+    productId:string,
     locale: string,
     price: number,
     quantity:number
 }
 
-type orderType = {
-    _id:String,
-    items: itemType[],
-    clientId:Number,
-}
-
-
 
 function Cart() {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const navigate = useNavigate()
+    const {setItemsCart, itemsCart, totalCartPrice} = useGlobal()
+    const { isOpen, onOpen, onClose} = useDisclosure()
 
-    const [items, setItems] =useState([
+   
+
+
+    function removeItem(productId:string, locale:string){
+        const newItems = itemsCart.slice().filter((item)=>
         {
-            name:'banana',
-            productId:'1',
-            locale:'brazilian',
-            price:2.80,
-            quantity:2
-        },
-        { 
-            productId:'2',
-            locale:'brazilian',
-            price:1000,
-            quantity:2
-        },
-        {
-            name:'limao',
-            productId:'3',
-            locale:'brazilian',
-            price:2.80,
-            quantity:2
-        },
-        {
-            name:'tomate',
-            productId:'4',
-            locale:'brazilian',
-            price:2.80,
-            quantity:2
-        },
-        {
-            name:'limao',
-            productId:'3',
-            locale:'brazilian',
-            price:2.80,
-            quantity:2
-        },
-        {
-            name:'tomate',
-            productId:'4',
-            locale:'brazilian',
-            price:2.80,
-            quantity:2
-        },
-        {
-            name:'limao',
-            productId:'3',
-            locale:'brazilian',
-            price:2.80,
-            quantity:2
-        },
-        {
-            name:'tomate',
-            productId:'4',
-            locale:'brazilian',
-            price:2.80,
-            quantity:2
-        },
-        {
-            name:'tomate',
-            productId:'4',
-            locale:'brazilian',
-            price:2.80,
-            quantity:2
-        },
-        {
-            name:'tomate',
-            productId:'4',
-            locale:'brazilian',
-            price:2.80,
-            quantity:2
-        },
-        {
-            name:'tomate',
-            productId:'4',
-            locale:'brazilian',
-            price:2.80,
-            quantity:2
-        },
-        {
-            name:'tomate',
-            productId:'4',
-            locale:'brazilian',
-            price:2.80,
-            quantity:2
-        },
-        {
-            name:'tomate',
-            productId:'4',
-            locale:'brazilian',
-            price:2.80,
-            quantity:2
-        },
-        {
-            name:'tomate',
-            productId:'4',
-            locale:'brazilian',
-            price:2.80,
-            quantity:2
-        },
-        {
-            name:'tomate',
-            productId:'4',
-            locale:'brazilian',
-            price:2.80,
-            quantity:2
-        },
-        {
-            name:'tomate',
-            productId:'4',
-            locale:'brazilian',
-            price:2.80,
-            quantity:2
+           if(item.productId===productId && item.locale === locale){return false;
+        }else{
+           return true;
         }
-    ])
 
-    const itemslenght = useState(items.length)
-
-    function removeItem(key:number){
-        console.log(key)
-        const newItems = items.slice();
-        delete newItems[key];
-        setItems(newItems)
+        })
+        setItemsCart(newItems)
     }
 
-    function setItemQuantity(key:number, value:number){
-        const newItems = items.slice();
-        newItems[key] = {
-            productId:items[key].productId,
-            name:items[key].name,
-            locale:items[key].locale,
-            price:(items[key].price/items[key].quantity)*value,
-            quantity:value
-        };
+    function setItemQuantity(productId:string, locale:string, value:number){
+        const newItems = itemsCart?.map((item)=>{
+            if(item.locale === locale && productId == item.productId){
+                return {
+                    productId:item.productId,
+                    name:item.name,
+                    locale:item.locale,
+                    price:(item.price/item.quantity)*value,
+                    quantity:value
+                }
 
-        setItems(newItems)
-
-
-        setItems(newItems)
+            }else{
+                return item
+            }
+        });
+        setItemsCart(newItems)
     }
+
 
     const handleClick = () => {
         onOpen()
@@ -203,56 +99,70 @@ function Cart() {
                 color='#ffffff'
                 fontSize='14px'
                 fontWeight='bold'
-                >{itemslenght}</Text>
+                >{itemsCart.length}</Text>
             </Circle>
             <MdOutlineShoppingCart size={25} color='yellow' />
             </>
         }/>
        
-            
-        
            
-    <Drawer onClose={onClose} isOpen={isOpen} size='lg'>
-        <DrawerOverlay/>
-        <DrawerContent>
-        <DrawerCloseButton/>
+        <Drawer  onClose={onClose} isOpen={isOpen} size='lg'>
+            <DrawerOverlay/>
+            <DrawerContent>
+            <DrawerCloseButton/>
 
-        <DrawerHeader 
-        fontSize='30px'
-        fontWeight='bold'>{`Carrinho`}</DrawerHeader>
+            <DrawerHeader 
+            fontSize='30px'
+            fontWeight='bold'>{`Carrinho`}</DrawerHeader>
 
-          <DrawerBody>
-            <Grid templateColumns='6fr 3fr 3fr 0fr' 
-            alignItems='start'
-            maxH='70vh' 
-            overflowY='scroll'>
+            <DrawerBody>
+                <Grid templateColumns='6fr 3fr 3fr 0fr' 
+                alignItems='start'
+                maxH='70vh' 
+                overflowY='scroll'>
+            
+                    <GridItem fontWeight='bold' flex={6}>Itens</GridItem>
+                    <GridItem fontWeight='bold' flex={2}>Qtd</GridItem>
+                    <GridItem fontWeight='bold' flex={4}>Preço</GridItem>
+                    <GridItem fontWeight='bold' flex={4}></GridItem>
+                    
+                    {
+                    itemsCart?.map((item, index)=>
+                            <ItemCart 
+                            remove={removeItem} 
+                            key={index.toString()} 
+                            properties={item}
+                            setQuantity={setItemQuantity}
+                            />
+                        )
+                    }
+                </Grid>
+            </DrawerBody>
         
-                <GridItem fontWeight='bold' flex={6}>Itens</GridItem>
-                <GridItem fontWeight='bold' flex={2}>Qtd</GridItem>
-                <GridItem fontWeight='bold' flex={4}>Preço</GridItem>
-                <GridItem fontWeight='bold' flex={4}></GridItem>
-                
-                {
-                    items.map((item, index)=>
-                        <ItemCart remove={removeItem} 
-                        key={index.toString()} 
-                        index={index} 
-                        properties={item}
-                        setQuantity={setItemQuantity}
-                        />
+            <HStack 
+            fontWeight='bold'
+            marginY='2rem'
+            marginX='2rem'
+            >
+            
+                <Button 
+                w='35%'
+                colorScheme='yellow'
+                onClick={()=>{
+                    onClose();
+                    navigate('/checkout');
 
-                    )
                 }
-            </Grid>
+                }
+                >Fechar Pedido</Button>
+                <Spacer/>
+                <Text>Total do pedido:</Text>
 
-        </DrawerBody>
-        <Button 
-        marginY='2rem'
-        marginX='2rem'
-        w='35%'
-        colorScheme='yellow'>Fechar Pedido</Button>
-        
-        </DrawerContent>
+
+                <Text>R${totalCartPrice?.toFixed(2)}</Text>
+            </HStack>
+            
+            </DrawerContent>
         </Drawer>
     </Flex>
 

@@ -1,12 +1,63 @@
+
+import { Accordion, 
+  AccordionButton, 
+  AccordionIcon, 
+  AccordionItem, 
+  AccordionPanel, 
+  HStack, 
+  IconButton, 
+  Text, 
+  Wrap, 
+  WrapItem,
+  Box
+
 } from '@chakra-ui/react';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { MdArrowBack} from 'react-icons/md'
+
 import {useLinkClickHandler} from 'react-router-dom';
 import OrderCard from '../../Components/OrderCard';
+import { useEffect, useState } from 'react';
+import { useGlobal } from '../../Context/Global/GlobalContext';
+
+type itemsType= {
+  productId: number,
+  locale: string,
+  price: number,
+  quantity: number,
+  name: string,
+  _id: string
+}
+
+type orderType = {
+  _id?: string,
+  items: itemsType[],
+  clientId: number,
+  data?:string
+}
+
+
 function Orders() {
+  const {getOrders} = useGlobal()
   const [items, setItems] = useState<orderType[]>()
   const [ordersLoadingStatus, setOrdersLoadingStatus] = useState(0)
+  
+  useEffect(()=>{
+    onload()
+  },
+    [])
+
+
+  async function onload() {
+      const {data, status} = await getOrders()
+      setOrdersLoadingStatus(status)
+    console.log(data)
+      setItems(data)
+  }
+
+
+
   return (
     <Wrap
     justify='center'

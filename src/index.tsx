@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
-import { ChakraProvider, Grid } from "@chakra-ui/react"
+import { ChakraProvider } from "@chakra-ui/react"
 import styled from "@emotion/styled";
 import {BrowserRouter} from 'react-router-dom';
 
 import App from './Pages';
 import { AuthProvider } from './Context/Auth/AuthContext';
 import { CookiesProvider } from 'react-cookie';
+import { GlobalProvider } from './Context/Global/GlobalContext';
 
 const AppContainer = styled.div`
   font-family: "M PLUS Rounded 1c";
@@ -22,13 +23,16 @@ ReactDOM.render(
         <BrowserRouter>
           <AuthProvider>
 
+            <GlobalProvider>
               <React.StrictMode>
                   <App/>
               </React.StrictMode>
+            </GlobalProvider>
 
           </AuthProvider>
         </BrowserRouter>
       </CookiesProvider>
+
     </AppContainer>
   </ChakraProvider>,
   document.getElementById('root')

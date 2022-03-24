@@ -2,61 +2,12 @@
 import { Box, Wrap, WrapItem} from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import ItemCard from '../../Components/ItemCard';
+import { useGlobal } from '../../Context/Global/GlobalContext';
 
 
 
 function Home() {
-  const items = [
-    {
-      hasDiscount: true,
-      name: 'Rear view of modern home with pool',
-      images: ['https://bit.ly/2Z4KKcF'],
-      description: 'Modern home in city center in the heart of historic Los Angeles',
-      price: '$1,900.00',
-      discountValue:'0.05',
-      material: 'concrete',
-      category: 'Fantastic',
-      id: '1',
-      locale:'brazilian'
-    },
-    {
-      hasDiscount: true,
-      name: 'Rear view of modern home with pool',
-      images: ['https://bit.ly/2Z4KKcF'],
-      description: 'Modern home in city center in the heart of historic Los Angeles',
-      price: '$1,900.00',
-      discountValue:'0.05',
-      material: 'concrete',
-      category: 'Fantastic',
-      id: '1',
-      locale:'brazilian'
-    },
-    {
-      hasDiscount: true,
-      name: 'Rear view of modern home with pool',
-      images: ['https://bit.ly/2Z4KKcF'],
-      description: 'Modern home in city center in the heart of historic Los Angeles',
-      price: '$1,900.00',
-      discountValue:'0.05',
-      material: 'concrete',
-      category: 'Fantastic',
-      id: '1',
-      locale:'brazilian'
-    },
-    {
-      hasDiscount: false,
-      name: 'Rear view of modern home with pool',
-      images: ['https://bit.ly/2Z4KKcF'],
-      description: 'Modern home in city center in the heart of historic Los Angeles',
-      price: '$1,900.00',
-      discountValue:'0.05',
-      material: 'concrete',
-      category: 'Fantastic',
-      id: '1',
-      locale:'brazilian'
-    }
-
-  ]
+  const {products} = useGlobal()
 
   return (
     <Box 
@@ -72,7 +23,7 @@ function Home() {
       >
       
       {
-        items.map(
+        products?.map(
           item=>
           <Link to={`/home/${item.id}-${item.locale}`}>
             <WrapItem>

@@ -16,93 +16,92 @@ import Informations from '../../Components/Informations';
 
 import Login from '../../Components/Login';
 import Register from '../../Components/Register';
+import { useAuth } from '../../Context/Auth/AuthContext';
 
 
 function User() {
-    const [username, setUsername] = useState('seu nome')
-    const [isLogued, setIsLogued] = useState(false) 
+    const [isLogin, setIsLogin] = useState(true);
+    const {userInfo, handlerLogin, handlerRegister, handlerLogout, isLogued} = useAuth();
+    
 
-    const [isLogin, setIsLogin] = useState(true) 
+    return (
+        <Popover>
+            <PopoverTrigger>
+                <IconButton
+                    onPointerDownCapture={(event)=>console.log(event)}
+                    aria-label=''
+                    borderRadius={100}
+                    h={47.988}
+                    w={47.988}
+                    bg='#000'
+                    icon={
+                        <Avatar 
+                        size='md'
+                        bg='#000ff'
+                        color='yellow'  
+                        name={`${userInfo?.name} ${userInfo?.lastname}`}
+                        src={isLogued? undefined:'./user.png'}
+                        />
+                }/>
+            </PopoverTrigger>
 
-  return (
-    <Popover
-    placement='bottom-start'
-    >
-        <PopoverTrigger>
-             
-            <IconButton
-                aria-label=''
-                borderRadius={100}
-                h={47.988}
-                w={47.988}
-                bg='#000'
-                icon={
-                    <Avatar 
-                    size='md'
-                    bg='#000ff'
-                    color='yellow'  
-                    name={username}
-                    src={isLogued? undefined:'./user.png'}
-                    />
-            }/>
-        </PopoverTrigger>
+            <PopoverContent>
+                <PopoverArrow/>
+                <PopoverCloseButton/>
+                <PopoverHeader>
+                    <HStack marginRight='1.5rem'>
+                        
+                        {isLogued?
+                            (<Text fontFamily='M PLUS Rounded 1c'>Bem-vindo {userInfo?.name}!</Text>)
+                            :
+                            isLogin?
+                                (   
+                                    <>
+                                        <Text 
+                                        flex={1}
+                                        fontWeight='bold'
+                                        fontFamily='M PLUS Rounded 1c'>Logar</Text>
 
-        <PopoverContent>
-            <PopoverArrow/>
-            <PopoverCloseButton/>
-            <PopoverHeader>
-                <HStack marginRight='1.5rem'>
-                    
-                    
-                    {isLogued?
-                        (<Text fontFamily='M PLUS Rounded 1c'>Bem-vindo {username}!</Text>)
-                        :
-                        isLogin?
-                            (   
-                                <>
-                                    <Text 
-                                    flex={1}
-                                    fontWeight='bold'
-                                    fontFamily='M PLUS Rounded 1c'>Logar {username}</Text>
-                                    <Button 
-                                    colorScheme='red'
-                                    onClick={()=>setIsLogin(!isLogin)}
-                                    >Criar conta</Button>
-                                </>
-                            )
+                                        <Button 
+                                        colorScheme='red'
+                                        onClick={()=>setIsLogin(!isLogin)}
+                                        >Criar conta</Button>
+                                    </>
+                                )
                                 :
                                 (
                                     <>
                                         <Text 
                                         flex={1}
                                         fontWeight='bold'
-                                        fontFamily='M PLUS Rounded 1c'>Criar conta {username}</Text>
+                                        fontFamily='M PLUS Rounded 1c'>Criar conta</Text>
+
                                         <Button 
                                         colorScheme='red'
                                         onClick={()=>setIsLogin(!isLogin)}
                                         >Logar</Button>
                                     </>
                                 )
-                    }
-                   
-                </HStack>
-               
+                        }
+                    
+                    </HStack>
+                
 
-            </PopoverHeader>
-            
-            {
-            isLogued?
-               (<Informations/>)
-                :
-                isLogin?
-                    (<Login/>)
+                </PopoverHeader>
+                
+                {
+                isLogued?
+                (<Informations onSubmit={handlerLogout} userInfo={userInfo}/>)
                     :
-                    (<Register/>)
-            }
+                    isLogin?
+                        (<Login onSubmit={handlerLogin}/>)
+                        :
+                        (<Register onSubmit={handlerRegister}/>)
+                }
 
-        </PopoverContent>
-    </Popover>
-  );
+            </PopoverContent>
+        </Popover>
+    );
 }
 
 export default User;

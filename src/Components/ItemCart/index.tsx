@@ -19,11 +19,10 @@ interface propertiesType{
 }
 
 
-function ItemCart({properties, remove, index, setQuantity}:{
+function ItemCart({properties, setQuantity, remove}:{
     properties:propertiesType, 
-    remove:(key:number)=>void,
-    setQuantity:(key:number, value:number)=>void,
-    index:number
+    remove:(productId:string, locale:string)=>void,
+    setQuantity:(productId:string, locale:string, value:number)=>void,
 
 }){
     
@@ -39,7 +38,7 @@ function ItemCart({properties, remove, index, setQuantity}:{
             w='4.1rem'
             max={100}
             defaultValue={properties.quantity}
-            onChange={(value)=> setQuantity(index, parseInt(value))} 
+            onChange={(value)=> setQuantity(properties.productId, properties.locale, parseInt(value))} 
             min={1}>
                 <NumberInputField />
                 <NumberInputStepper>
@@ -57,7 +56,7 @@ function ItemCart({properties, remove, index, setQuantity}:{
             <IconButton 
             aria-label=""
             icon={<FaTrash/>}
-            onClick={()=>{remove(index)}}
+            onClick={()=>{remove(properties.productId, properties.locale)}}
              />
         </GridItem>
         </>
