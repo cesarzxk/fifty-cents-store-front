@@ -5,39 +5,47 @@ import {
   IconButton
 } from '@chakra-ui/react'
 import {SearchIcon} from '@chakra-ui/icons'
-import { useGlobal } from '../../Context/Global/GlobalContext';
-import { useRef, useState } from 'react';
+import {useState} from 'react';
 
-function Search() {
+import {useGlobal} from '../../Context/Global/GlobalContext';
+
+type searchProps = {
+  onBlur?:()=>void,
+  autoFocus?:boolean,
+}
+
+function Search({onBlur, autoFocus = false}:searchProps) {
   const {setKeyword} = useGlobal();
   const [value, setValue] = useState('')
 
-  
- 
   return (
     <>
-        <Flex>
-            <Box
-            display='flex'
-            flexDirection='row'
-            >
-                <Input
-                placeholder='Não encontrou?Busque!'
-                value={value}
-                onChange={e=> setValue(e.target.value)}
-                />
+      <Flex>
+        <Box
+        onBlur={onBlur}
+        flex={1}
+        display='flex'
+        flexDirection='row'>
+            <Input
+            placeholder='Não encontrou?Busque!'
+            value={value}
+            autoFocus={autoFocus}
+            onChange={
+              (event)=> setValue(event.target.value)
+            }
+            />
 
-                <IconButton
-                borderWidth={1}
-                colorScheme='yellow'
-                aria-label='Search database'
-                icon={<SearchIcon/>}
-                onClick={()=>setKeyword(value)}
-                />
-            </Box>
-        </Flex>
-      </>
-        
+            <IconButton
+            borderWidth={1}
+            colorScheme='yellow'
+            aria-label='Search database'
+            icon={<SearchIcon/>}
+            onClick={
+              ()=>setKeyword(value)
+            }/>
+        </Box>
+      </Flex>
+    </>
   );
 }
 

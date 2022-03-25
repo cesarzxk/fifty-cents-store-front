@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from "@chakra-ui/react"
 import styled from "@emotion/styled";
-import {BrowserRouter} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import App from './Pages';
 import { AuthProvider } from './Context/Auth/AuthContext';
@@ -18,14 +18,14 @@ const AppContainer = styled.div`
 ReactDOM.render(
   <ChakraProvider>
     <AppContainer>
-      
+
       <CookiesProvider>
         <BrowserRouter>
           <AuthProvider>
 
             <GlobalProvider>
               <React.StrictMode>
-                  <App/>
+                <App/>
               </React.StrictMode>
             </GlobalProvider>
 

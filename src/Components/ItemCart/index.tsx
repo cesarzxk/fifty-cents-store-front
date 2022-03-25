@@ -28,42 +28,51 @@ function ItemCart({properties, setQuantity, remove}:{
     
     return(
         <>
-        <GridItem
-        flex={4}
-        >{properties.name}</GridItem>
+            <GridItem
+            flex={4}>
+                {properties.name}
+            </GridItem>
 
-        <GridItem
-        >
-            <NumberInput size='xs' 
-            w='4.1rem'
-            max={100}
-            defaultValue={properties.quantity}
-            onChange={(value)=> setQuantity(properties.productId, properties.locale, parseInt(value))} 
-            min={1}>
-                <NumberInputField />
-                <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-                </NumberInputStepper>
-            </NumberInput>
-        </GridItem>
-        
-        <GridItem
-        flex={1}
-        >{(properties.price).toFixed(2)}</GridItem>
+            <GridItem>
+                <NumberInput 
+                size='xs' 
+                w='4.1rem'
+                max={100}
+                defaultValue={properties.quantity}
+                onChange={
+                    (value)=> setQuantity(
+                        properties.productId, 
+                        properties.locale, 
+                        parseInt(value)
+                        )
+                } 
+                min={1}>
+                    <NumberInputField />
+                    <NumberInputStepper>
+                        <NumberIncrementStepper/>
+                        <NumberDecrementStepper/>
+                    </NumberInputStepper>
+                </NumberInput>
+            </GridItem>
+            
+            <GridItem
+            flex={1}>
+                {(properties.price).toFixed(2)}
+            </GridItem>
 
-        <GridItem>
-            <IconButton 
-            aria-label=""
-            icon={<FaTrash/>}
-            onClick={()=>{remove(properties.productId, properties.locale)}}
-             />
-        </GridItem>
+            <GridItem>
+                <IconButton 
+                aria-label=""
+                icon={<FaTrash/>}
+                onClick={
+                    ()=>{remove(
+                        properties.productId, 
+                        properties.locale)
+                    }
+                }/>
+            </GridItem>
         </>
-
-        
     )
-
 }
 
 export default ItemCart;

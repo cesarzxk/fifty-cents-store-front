@@ -3,10 +3,9 @@ import {
   Switch, 
   Wrap, 
   WrapItem, 
-  Center, 
   Text, 
   Spacer, 
-  Box
+  Flex
 } from '@chakra-ui/react'
 import { useGlobal } from '../../Context/Global/GlobalContext'
 
@@ -68,88 +67,109 @@ function Filters() {
   }
 
   function adicionarFilterMaterial(filter:string){
-      const newMaterial = [filter, ...filtersMaterial]
-      setFiltersMaterial(newMaterial)
+    const newMaterial = [filter, ...filtersMaterial]
+    setFiltersMaterial(newMaterial)
   }
 
   
   return (
-      <Box 
-      w='25%'
+      <Flex 
       bg="gray.300"
       h='100%'
-      >
-        <Text 
-        fontWeight='bold' 
-        fontFamily='M PLUS Rounded 1c' 
-        fontSize={25} 
-        marginLeft={1}
-        >Filters</Text>
-        
+      flex='2'
+      borderRadius='lg'
+      justifyContent='center'>
+
         <VStack
-        borderRadius='md'
-        >
-            <Text
-            fontWeight='700' 
-            fontFamily='M PLUS Rounded 1c' 
-            >Categoria</Text>
+        w='95%'
+        marginTop='1rem'>
 
-            <Wrap 
-            w='95%' 
-            align='center' 
-            justify='center'
-            borderRadius='md'
-            >
-              {categorys.map(category=>
-                  <WrapItem w='45%'>
-                    <Center flex={1} h='25px'>
-                      <Text fontFamily='M PLUS Rounded 1c' fontWeight='400' fontSize='12px' >{category}</Text>
-                      <Spacer/>
-                      <Switch colorScheme='yellow' 
-                      size='md' 
-                      border='1px solid rgb(255, 190, 7)'
-                      borderRadius={15}
-                      onChange={(event)=>event.target.checked? 
-                        adicionarFilterCategory(event.target.value):removeFilterCategory(event.target.value)}
-                      value={category}
-                      />
-                    </Center>
-                  </WrapItem>
-                  
-                  )}
-            </Wrap>
+          <Text 
+          fontWeight='bold' 
+          fontFamily='M PLUS Rounded 1c' 
+          fontSize={25} 
+          alignSelf='start'
+          >Filters</Text>
+        
+          <Text
+          fontWeight='700' 
+          fontFamily='M PLUS Rounded 1c' 
+          >Categoria</Text>
 
-            <Text
-            fontWeight='700' 
-            fontFamily='M PLUS Rounded 1c' 
-            >Material</Text>
+          <Wrap
+          borderRadius='md'>
+            {categorys.map(category=>
+              <WrapItem
+              key={category} 
+              w='45%'
+              h='25px'>
+          
+                  <Text 
+                  fontFamily='M PLUS Rounded 1c' 
+                  fontWeight='400' 
+                  fontSize='12px' >
+                    {category}
+                  </Text>
 
-            <Wrap w='95%' 
-            align='center' 
-            justify='center'
-            borderRadius='md'
-            >
-              {materials.map(material=>
-                  <WrapItem w='45%'>
-                    <Center flex={1} h='25px'>
-                      <Text fontFamily='M PLUS Rounded 1c' fontWeight='400' fontSize='12px'>{material}</Text>
-                      <Spacer/>
-                      <Switch colorScheme='yellow' 
-                      size='md' 
-                      border='1px solid rgb(255, 190, 7)'
-                      borderRadius={15}
-                      onChange={(event)=>event.target.checked? 
-                      adicionarFilterMaterial(event.target.value):removeFilterMaterial(event.target.value)}
-                      value={material}
-                      />
-                    </Center>
-                  </WrapItem>
-                  
-                  )}
+                  <Spacer/>
+
+                  <Switch colorScheme='yellow' 
+                  size='md' 
+                  border='1px solid rgb(255, 190, 7)'
+                  borderRadius={15}
+                  onChange={
+                    (event)=>event.target.checked? 
+                    adicionarFilterCategory(event.target.value)
+                    :
+                    removeFilterCategory(event.target.value)
+                  }
+                  value={category}/>
+              </WrapItem>
+              )}
+          </Wrap>
+
+          <Text
+          fontWeight='700' 
+          fontFamily='M PLUS Rounded 1c'>
+          Material
+          </Text>
+
+          <Wrap 
+          borderRadius='md'>
+
+            {
+            materials.map(material=>
+                <WrapItem 
+                key={material}
+                w='45%'
+                h='25px'>
+                  <Text 
+                  fontFamily='M PLUS Rounded 1c' 
+                  fontWeight='400' 
+                  fontSize='12px'>
+                  {material}
+                  </Text>
+
+                  <Spacer/>
+
+                  <Switch 
+                  colorScheme='yellow' 
+                  size='md' 
+                  border='1px solid rgb(255, 190, 7)'
+                  borderRadius={15}
+                  onChange={
+                    (event)=>event.target.checked? 
+                    adicionarFilterMaterial(event.target.value)
+                    :
+                    removeFilterMaterial(event.target.value)
+                  }
+                  value={material}/>
+                </WrapItem>
+                )}
             </Wrap>
             <Spacer/>
         </VStack>
-        </Box>
+      </Flex>
       
   );
 }

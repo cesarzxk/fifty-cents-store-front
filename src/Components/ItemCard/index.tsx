@@ -3,6 +3,7 @@ import {
   Box, 
   Image 
 } from "@chakra-ui/react";
+import useDimensions from "../../Hooks/useDimensions";
 
 type item ={	
     hasDiscount: boolean,
@@ -18,15 +19,35 @@ type item ={
 }
 
 function ItemCard({property}:{property:item}) {
+    const dimensions = useDimensions()
+      function switchWidth(){
+        if(dimensions.width>=700){
+            return '13rem'
+        }else{
+            return '90%'
+        }
+    }
+
     return (
-      <Box maxW='13rem' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-        <Image src={property.images[0]} alt={property.name} />
-  
+      <Box 
+      maxW={switchWidth()}
+      borderWidth='1px' 
+      borderRadius='lg' 
+      overflow='hidden'>
+        <Image 
+        src={property.images[0]} 
+        alt={property.name}/>
+
         <Box p='2'>
-          <Box display='flex' alignItems='baseline'>
+          <Box 
+          display='flex' 
+          alignItems='baseline'>
             {
             property.hasDiscount&&
-                <Badge borderRadius='full' px='2' colorScheme='red'>
+                <Badge 
+                borderRadius='full' 
+                px='2' 
+                colorScheme='red'>
                 sale {parseFloat(property.discountValue)*100}%
                 </Badge>
             }
@@ -54,7 +75,10 @@ function ItemCard({property}:{property:item}) {
   
           <Box>
             R${property.price}
-            <Box as='span' color='gray.600' fontSize='sm'>
+            <Box 
+            as='span' 
+            color='gray.600' 
+            fontSize='sm'>
               /u
             </Box>
           </Box>

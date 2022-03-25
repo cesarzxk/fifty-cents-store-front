@@ -1,18 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { createContext, ReactNode } from "react";
 import { authenticate, register } from '../../Api';
-import {useCookies} from 'react-cookie'
+import { useCookies } from 'react-cookie'
 import { AxiosError } from 'axios';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
-type authContextData ={
-    userInfo:userInfoType|undefined,
-    isLogued:boolean,
-    token:string,
-    handlerLogin:(email:string, password:string)=> Promise<number>,
-    handlerRegister:(user:userRegisterType) => Promise<number>,
-    handlerLogout:()=>void;
+type authContextData = {
+    userInfo: userInfoType | undefined,
+    isLogued: boolean,
+    token: string,
+    handlerLogin: (email: string, password: string) => Promise<number>,
+    handlerRegister: (user: userRegisterType) => Promise<number>,
+    handlerLogout: () => void;
 
 }
 
@@ -24,18 +24,18 @@ type authProviderProps = {
 }
 
 type userInfoType = {
-    _id?:string,
-    name:string,
-    lastname:string,
-    email:string
+    _id?: string,
+    name: string,
+    lastname: string,
+    email: string
 }
 
-interface userRegisterType extends userInfoType{
-    password:string
+interface userRegisterType extends userInfoType {
+    password: string
 }
 
 
-export function AuthProvider({children}:authProviderProps){
+export function AuthProvider({ children }: authProviderProps) {
     const navigate = useNavigate()
     const [cookie, setCookie, removeCookie] = useCookies();
     const [userInfo, setUserInfo] = useState<userInfoType | undefined>(
@@ -46,60 +46,58 @@ export function AuthProvider({children}:authProviderProps){
             _id: cookie._id
         }
     );
-    const [isLogued, setIsLogued] = useState(false); 
-    const [token, setToken] = useState(cookie.token); 
+    const [isLogued, setIsLogued] = useState(false);
+    const [token, setToken] = useState(cookie.token);
 
-    useEffect(()=>{
+    useEffect(() => {
         RetrieveSection()
-    },
-    [])
+        console.log(isLogued)
+    }, [])
 
-    async function RetrieveSection(){
-        if(cookie.token != null){
+    function RetrieveSection() {
+        if (cookie.token != undefined) {
             setIsLogued(true)
         }
-        console.log(userInfo)
     }
 
 
-    async function handlerLogin(email:string, password:string){
+    async function handlerLogin(email: string, password: string) {
 
-        const {data, status} = await authenticate.post('', {
-            
-            email:email,
-            password:password
-            
-        }).then(result=>{
+        const { data, status } = await authenticate.post('', {
+            email: email,
+            password: password
+
+        }).then(result => {
             return {
-                status:result.status,
-                data:result.data
+                status: result.status,
+                data: result.data
             }
 
-        }).catch((e:AxiosError)=>{
-            return{
-                status: e.response?.status? e.response?.status:0,
-                data:e.response?.data
+        }).catch((e: AxiosError) => {
+            return {
+                status: e.response?.status ? e.response?.status : 0,
+                data: e.response?.data
             }
         }
         )
 
-        if(status === 200){
+        if (status === 200) {
             setUserInfo(data)
             setToken(data.token)
             setCookie('token', data.token)
-            setCookie('name',data.name)
-            setCookie('email',data.email)
-            setCookie('lastname',data.lastname)
-            setCookie('_id',data.id)
+            setCookie('name', data.name)
+            setCookie('email', data.email)
+            setCookie('lastname', data.lastname)
+            setCookie('_id', data.id)
             setIsLogued(true)
         }
 
         return status
-        
+
     }
 
 
-    function handlerLogout(){
+    function handlerLogout() {
         removeCookie('token');
         removeCookie('name');
         removeCookie('email');
@@ -111,36 +109,36 @@ export function AuthProvider({children}:authProviderProps){
     }
 
 
-    async function handlerRegister(user:userRegisterType){
-        const {status, data} = await register.post('',
+    async function handlerRegister(user: userRegisterType) {
+        const { status, data } = await register.post('',
             {
-                password:user.password,
-                name:user.name,
-                lastname:user.lastname,
-                email:user.email,
+                password: user.password,
+                name: user.name,
+                lastname: user.lastname,
+                email: user.email,
             }
-        ).then(result=>{
+        ).then(result => {
             return {
-                status:result.status,
-                data:result.data
+                status: result.status,
+                data: result.data
             }
 
-        }).catch((e:AxiosError)=>{
-            return{
-                status: e.response?.status? e.response?.status:0,
-                data:e.response?.data
+        }).catch((e: AxiosError) => {
+            return {
+                status: e.response?.status ? e.response?.status : 0,
+                data: e.response?.data
             }
         })
 
-        
-        if (status===200){
+
+        if (status === 200) {
             setUserInfo(data)
             setToken(data.token)
-            setCookie('token',data.token)
-            setCookie('name',data.name)
-            setCookie('email',data.email)
-            setCookie('lastname',data.lastname)
-            setCookie('_id',data.id)
+            setCookie('token', data.token)
+            setCookie('name', data.name)
+            setCookie('email', data.email)
+            setCookie('lastname', data.lastname)
+            setCookie('_id', data.id)
             setIsLogued(true)
         }
 
@@ -148,9 +146,9 @@ export function AuthProvider({children}:authProviderProps){
     }
 
 
-    
 
-    return(
+
+    return (
         <AuthContext.Provider value={{
             userInfo,
             isLogued,
@@ -158,11 +156,11 @@ export function AuthProvider({children}:authProviderProps){
             handlerRegister,
             handlerLogout,
             token
-        
+
         }}>
             {children}
         </AuthContext.Provider>
-        )
+    )
 }
 
-export const useAuth = ()=> useContext(AuthContext);
+export const useAuth = () => useContext(AuthContext);

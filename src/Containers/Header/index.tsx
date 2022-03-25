@@ -1,66 +1,85 @@
-import { 
-    GridItem, 
-    Img, 
-    Flex, 
-    Box, 
-    Spacer
+import { SearchIcon } from '@chakra-ui/icons';
+import {
+  Img,
+  Spacer,
+  HStack,
+  IconButton,
+
 } from '@chakra-ui/react'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import Search from '../../Components/Search';
+import useDimensions from '../../Hooks/useDimensions';
 import Cart from '../Cart';
 import User from '../User';
 
 
-function Header(){
-    
+function Header() {
+  const navigate = useNavigate()
+  const dimensions = useDimensions()
+  const [isSearch, setIsSearch] = useState(false)
 
-    return(
-        
-      <GridItem 
-      bg="gray.300" 
-      w='70%' 
+  function switchWidth() {
+    if (dimensions.width >= 1366) {
+      return '70%'
+    } else {
+      return '100%'
+    }
+  }
+
+  return (
+    <HStack
+      bg="gray.300"
+      w={switchWidth()}
       h='5rem'
       marginY='1rem'
-      >
-        <Flex>
-          <Box>
-            <Img 
-            h='5rem' 
-            src='./logo.svg'
-            marginLeft='1rem'
-            /> 
-          </Box>
+      paddingX='1rem'
+      justifyContent='center'
+      alignItems='center'>
+      <Img
+      h='5rem'
+      src='./logo.svg'
+      onClick={
+          () => navigate('/')
+        }/>
 
-        
+      <Spacer/>
 
-          <Spacer/>
+      {
+        isSearch ?
+          (
+            <Search
+            autoFocus={true}
+            onBlur={() => setIsSearch(false)}/>
 
-          <Box 
-          marginTop='1rem'
-          marginRight='1rem'
-          >
-            <Search/>
-          </Box>
+          ) : (
+            <>
+              {
+                dimensions.width >= 400 ?
+                  (
+                    <Search/>
+                  ) : (
+                    <IconButton
+                    colorScheme='yellow'
+                    aria-label='Search database'
+                    h='3rem'
+                    w='3rem'
+                    borderRadius='100%'
+                    icon={<SearchIcon/>}
+                    onClick={
+                      () => setIsSearch(true)
+                    }/>
+                  )
+              }
+              <User/>
+              <Cart/>
+            </>
+          )
+      }
 
-          <Box 
-          h='2.5rem'
-          w='2.5rem'
-          marginTop='0.8rem'
-          marginRight='1rem'
-          >
-            <User/>
-          </Box>
-
-          <Box 
-          h='2.5rem'
-          w='2.5rem'
-          marginTop='0.8rem'
-          marginRight='1rem'
-          >
-            <Cart/>
-          </Box>
-        </Flex>
-    </GridItem>
-    )
+    </HStack>
+  )
 }
 
 export default Header

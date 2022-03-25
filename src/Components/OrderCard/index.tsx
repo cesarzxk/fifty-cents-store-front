@@ -42,29 +42,28 @@ function OrderCard({properties}:{properties:propertiesType}){
     
     const data = new Date(String(properties.data))
     return(
-        <AccordionItem>
-            <h2>
-                <AccordionButton h='4rem'>
-                        <HStack flex={1} textAlign='left'>
-                            <Text flex={3}>
-                                <b>Pedido Numero: </b>{properties._id} 
-                            </Text>
-                            
-                            <Text flex={1}>
-                                <b>Hora: </b>{data.getMinutes()}:{data.getHours()} 
-                            </Text>
-                            
-                            <Text flex={1}>
-                                 <b>Data: </b>  {data.getDay()}/{ data.getMonth()}/{data.getFullYear()}
-                            </Text>
-                        </HStack>
-                    <AccordionIcon />
-            </AccordionButton>
-            </h2>
+    <AccordionItem>
+        <h2>
+            <AccordionButton h='5rem'>
+                <HStack flex={1} textAlign='left'>
+                    <Text flex={3}>
+                        <b>Pedido Numero: </b>{properties._id} 
+                    </Text>
 
-        <AccordionPanel pb={4}>
+                    <Text flex={1}>
+                        <b>Hora: </b>{data.getMinutes()}:{data.getHours()} 
+                    </Text>
+
+                    <Text flex={1}>
+                        <b>Data: </b>{data.getDay()}/{data.getMonth()}/{data.getFullYear()}
+                    </Text>
+                </HStack>
+                <AccordionIcon/>
+            </AccordionButton>
+        </h2>
+
+        <AccordionPanel maxH='10rem' overflowY='scroll'>
         <Grid templateColumns='4fr 3fr 1fr'>
-        
                 <GridItem fontWeight='bold'>Nome</GridItem>
                 <GridItem fontWeight='bold'>Quantidade</GridItem>
                 <GridItem fontWeight='bold'>Preço</GridItem>
@@ -72,7 +71,6 @@ function OrderCard({properties}:{properties:propertiesType}){
                 properties.items.map((item)=>
                     
                     <>
-                        
                         <GridItem>
                             {item.name}
                         </GridItem>
@@ -91,13 +89,9 @@ function OrderCard({properties}:{properties:propertiesType}){
                 <GridItem fontWeight='bold'>Total</GridItem>
                 <GridItem fontWeight='bold'></GridItem>
                 <GridItem fontWeight='bold'>{total.toFixed(2)}</GridItem>
-            
             </Grid>
-            
-          
-        
         </AccordionPanel>
-      </AccordionItem>
+    </AccordionItem>
     )
 }
 export default OrderCard;

@@ -1,26 +1,26 @@
 
 import Filters from '../Components/Filters';
-import {Outlet, Route, Routes, useOutlet} from 'react-router-dom';
-
+import { Outlet, Route, Routes } from 'react-router-dom';
 import { Flex, Grid } from '@chakra-ui/react';
+
 
 import Item from '../Pages/Item';
 import Home from './Home';
-
 import Header from '../Containers/Header';
 import Orders from '../Pages/Orders';
 import Checkout from './Checkout';
+import useDimensions from '../Hooks/useDimensions';
+import DrawerFilter from '../Containers/DrawerFilter';
 
-export default function Pages(){
-    
-    return(
+export default function Pages() {
+    return (
         <Routes location="">
             <Route element={<Layout/>} path="">
                 <Route path='orders' element={<Orders/>}/>
                 <Route path='checkout' element={<Checkout/>}/>
                 <Route element={<LayoutFilter/>} path="">
-                    <Route  path="/" element={<Home/>}/>
-                    <Route  path="home/:slug" element={<Item/>} />
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="home/:slug" element={<Item/>}/>
                 </Route>
             </Route>
         </Routes>
@@ -29,31 +29,59 @@ export default function Pages(){
 }
 
 
-function Layout(){
-    return(
-        <Grid 
-        templateColumns='1fr'
+function Layout() {
+    return (
+        <Grid
         h='100vh'
         w='100vw'
         alignItems='center'
         display='flex'
         flexDirection='column'>
-        <Header/>
+            <Header/>
             <Outlet/>
         </Grid>
-        )
+    )
 }
 
 
-function LayoutFilter(){
-    return(
-        <Flex 
-            display='flex'
-            flexDirection='row'
-            height='85.5%'
-            w='70%'
+function LayoutFilter() {
+    const dimensions = useDimensions()
+
+    function switchHeight() {
+        if (dimensions.width >= 1366) {
+            return '85.5%'
+        } else {
+            return '86%'
+        }
+    }
+
+    function switchWidth() {
+        if (dimensions.width >= 1366) {
+            return '70%'
+        } else {
+            return '100%'
+        }
+    }
+
+    function switchFilter() {
+        if (dimensions.width >= 1366) {
+            return <Filters/>
+        } else {
+            return <DrawerFilter/>
+
+        }
+    }
+
+    return (
+        <Flex
+        display='flex'
+        flexDirection='row'
+        height={switchHeight()}
+        w={switchWidth()}
         >
-            <Filters/>   
+
+            {switchFilter()}
+
             <Outlet/>
         </Flex>
     )

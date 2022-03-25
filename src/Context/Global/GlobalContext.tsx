@@ -1,25 +1,25 @@
 import { AxiosError } from 'axios';
-import  { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { createContext, ReactNode } from "react";
 import { items, order } from '../../Api';
 import { useAuth } from '../Auth/AuthContext';
 
 
-type globalContextData ={
-    products:productType[],
-    filtersMaterial:string[],
-    filterCategory:string[],
-    keyword:string,
-    itemsCart:itemCartType[] | [], 
-    totalCartPrice:number,
-    setFiltersMaterial:(filterCategory:string[])=>void,
-    setFiltersCategory:(filterCategory:string[])=>void,
-    getItem:(locale:string, id:string)=>Promise<productType>,
-    getOrders:()=>Promise<responseProductsReques>,
-    setKeyword:(keyword:string)=>void,
-    setItemsCart:(items:itemCartType[] | [])=>void,
-    addItemtoCart:(item:itemCartType)=>void,
-    setOrder:()=>Promise<number>
+type globalContextData = {
+    products: productType[] | undefined,
+    filtersMaterial: string[],
+    filterCategory: string[],
+    keyword: string,
+    itemsCart: itemCartType[] | [],
+    totalCartPrice: number,
+    setFiltersMaterial: (filterCategory: string[]) => void,
+    setFiltersCategory: (filterCategory: string[]) => void,
+    getItem: (locale: string, id: string) => Promise<productType>,
+    getOrders: () => Promise<responseProductsReques>,
+    setKeyword: (keyword: string) => void,
+    setItemsCart: (items: itemCartType[] | []) => void,
+    addItemtoCart: (item: itemCartType) => void,
+    setOrder: () => Promise<number>
 
 }
 
@@ -36,104 +36,103 @@ type productType = {
     images: string[],
     description: string,
     price: string,
-    discountValue:string,
+    discountValue: string,
     material: string,
     category: string,
     id: string,
-    locale:string
+    locale: string
 }
 
-type responseProductsReques  ={
-    data:orderType[],
-    status:number
+type responseProductsReques = {
+    data: orderType[],
+    status: number
 }
 
-type orderItemsType= {
+type orderItemsType = {
     productId: number,
     locale: string,
     price: number,
     quantity: number,
     name: string,
     _id: string
-  }
-  
-  type orderType = {
+}
+
+type orderType = {
     _id?: string,
     items: orderItemsType[],
     clientId: number,
     data?: string,
-    total:number
-  }
+    total: number
+}
 
-  type itemCartType = {
-    name:string,
-    productId:string,
+type itemCartType = {
+    name: string,
+    productId: string,
     locale: string,
     price: number,
-    quantity:number
+    quantity: number
 }
 
 
-export function GlobalProvider({children}:globalProviderProps){
-    const {userInfo, token} = useAuth(); 
-    const [products, setProducts] = useState<productType[]>([])
+export function GlobalProvider({ children }: globalProviderProps) {
+    const { userInfo, token } = useAuth();
+    const [products, setProducts] = useState<productType[] | undefined>()
     const [filtersMaterial, setFiltersMaterial] = useState<string[]>([])
     const [filterCategory, setFiltersCategory] = useState<string[]>([])
     const [keyword, setKeyword] = useState('')
     const [itemsCart, setItemsCart] = useState<itemCartType[] | []>([])
     const [totalCartPrice, setTotalPriceCart] = useState<number>(0)
 
-    useEffect(()=>{
+    useMemo(() => {
         bindLists()
     }, [filterCategory, filtersMaterial, keyword])
 
 
-    function addItemtoCart(item:itemCartType){
+    function addItemtoCart(item: itemCartType) {
         const newCart = [item, ...itemsCart.slice()]
         setItemsCart(newCart)
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         setTotalCartPrice()
-    },[itemsCart])
+    }, [itemsCart])
 
-    function setTotalCartPrice(){
+    function setTotalCartPrice() {
         let vetor = 0
-        itemsCart.map(item=>
-            vetor= vetor + item.price
+        itemsCart.map(item =>
+            vetor = vetor + item.price
         )
         setTotalPriceCart(vetor)
     }
 
 
-
-    async function bindLists(){
+    async function bindLists() {
         const AllProducts = [
             ...await getItems('brazilian'),
             ...await getItems('european')
-            ]
+        ]
         setProducts(AllProducts)
 
     }
 
-    async function getItems(locale:string){
-        const {data} = await items.get('', {
-           params:{
-               locale:locale,
-               material:filtersMaterial,
-               category:filterCategory,
-               search:keyword==''?undefined:keyword
-           }
-        }).then(result=>{
+    async function getItems(locale: string) {
+        const { data } = await items.get('', {
+            params: {
+                locale: locale,
+                material: filtersMaterial,
+                category: filterCategory,
+                search: keyword == '' ? undefined : keyword
+            }
+        }).then(result => {
             return {
-                status:result.status,
-                data:result.data
+                status: result.status,
+                data: result.data
             }
 
-        }).catch((e:AxiosError)=>{
-            return{
-                status: e.response?.status? e.response?.status:0,
-                data:e.response?.data
+        }).catch((e: AxiosError) => {
+            return {
+                status: e.response?.status ? e.response?.status : 0,
+                data: e.response?.data
             }
         })
 
@@ -141,22 +140,22 @@ export function GlobalProvider({children}:globalProviderProps){
     }
 
 
-    async function getItem(locale:string, id:string){
-        const {data} = await items.get('', {
-           params:{
-               locale:locale,
-               id:id
-           }
-        }).then(result=>{
+    async function getItem(locale: string, id: string) {
+        const { data } = await items.get('', {
+            params: {
+                locale: locale,
+                id: id
+            }
+        }).then(result => {
             return {
-                status:result.status,
-                data:result.data
+                status: result.status,
+                data: result.data
             }
 
-        }).catch((e:AxiosError)=>{
-            return{
-                status: e.response?.status? e.response?.status:0,
-                data:e.response?.data
+        }).catch((e: AxiosError) => {
+            return {
+                status: e.response?.status ? e.response?.status : 0,
+                data: e.response?.data
             }
         }
         )
@@ -164,61 +163,61 @@ export function GlobalProvider({children}:globalProviderProps){
         return data as productType
     }
 
-    
-    async function getOrders(){
+
+    async function getOrders() {
         console.log(userInfo?._id)
-        const {data, status} = await order.get('', {
-           params:{
-               clientId:userInfo?._id,
-               
-           },
-           headers:{
-               "authorization":`Bearer ${token}`
-           }
-        }).then(result=>{
+        const { data, status } = await order.get('', {
+            params: {
+                clientId: userInfo?._id,
+
+            },
+            headers: {
+                "authorization": `Bearer ${token}`
+            }
+        }).then(result => {
             return {
-                status:result.status,
-                data:result.data
+                status: result.status,
+                data: result.data
             }
 
-        }).catch((e:AxiosError)=>{
-            return{
-                status: e.response?.status? e.response?.status:0,
-                data:e.response?.data
+        }).catch((e: AxiosError) => {
+            return {
+                status: e.response?.status ? e.response?.status : 0,
+                data: e.response?.data
             }
         }
         )
         console.log(data)
-        return {data, status} as responseProductsReques
+        return { data, status } as responseProductsReques
     }
 
-     
-    async function setOrder(){
+
+    async function setOrder() {
 
         console.log(token)
 
-        const {status} = await order.post('', 
-           {
-               clientId:userInfo?._id,
-               total:totalCartPrice,
-               items:itemsCart
+        const { status } = await order.post('',
+            {
+                clientId: userInfo?._id,
+                total: totalCartPrice,
+                items: itemsCart
 
-               
 
-           },{
-               headers:{
-                    "authorization": `Bearer ${token}`
-               }
-           }
-           ).then(result=>{
+
+            }, {
+            headers: {
+                "authorization": `Bearer ${token}`
+            }
+        }
+        ).then(result => {
             return {
-                status:result.status,
+                status: result.status,
             }
 
-        }).catch((e:AxiosError)=>{
-            return{
-                status: e.response?.status? e.response?.status:0,
-               
+        }).catch((e: AxiosError) => {
+            return {
+                status: e.response?.status ? e.response?.status : 0,
+
             }
         }
         )
@@ -226,29 +225,29 @@ export function GlobalProvider({children}:globalProviderProps){
     }
 
 
-return(
-    <GlobalContext.Provider value={{
-        products,
-        filtersMaterial,
-        filterCategory,
-        keyword,
-        itemsCart,
-        totalCartPrice,
-        setFiltersMaterial,
-        setFiltersCategory,
-        getItem,
-        getOrders,
-        setKeyword,
-        setItemsCart,
-        addItemtoCart,
-        setOrder,
+    return (
+        <GlobalContext.Provider value={{
+            products,
+            filtersMaterial,
+            filterCategory,
+            keyword,
+            itemsCart,
+            totalCartPrice,
+            setFiltersMaterial,
+            setFiltersCategory,
+            getItem,
+            getOrders,
+            setKeyword,
+            setItemsCart,
+            addItemtoCart,
+            setOrder,
 
 
-       
-    }}>
-        {children}
-    </GlobalContext.Provider>
+
+        }}>
+            {children}
+        </GlobalContext.Provider>
     )
 }
 
-export const useGlobal = ()=> useContext(GlobalContext);
+export const useGlobal = () => useContext(GlobalContext);
