@@ -1,8 +1,7 @@
 {
   "name": "fifty-cents-store",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
-
 
   "dependencies": {
     "@chakra-ui/icons": "^1.1.7",
