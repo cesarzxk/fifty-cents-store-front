@@ -95,32 +95,27 @@ describe("component Filters", () => {
   it("should input is disabled remove filter", () => {
     const useGlobalMocked = mocked(useGlobal);
 
-    let pushmocked = [""];
+    let pushmocked = [] as any;
 
-    useGlobalMocked.mockReturnValueOnce({
+    useGlobalMocked.mockReturnValue({
       setFiltersCategory(category: []) {
         pushmocked = category;
       },
       setFiltersMaterial(material: []) {
         pushmocked = material;
       },
-      filtersCategory: [],
-      filtersMaterial: [],
+      filtersCategory: pushmocked,
+      filtersMaterial: pushmocked,
     } as any);
 
     render(<Filters />);
 
     categorys.map((category) => {
-      const input = screen.getByTestId(category);
-      fireEvent.click(input);
-      fireEvent.click(input);
+      fireEvent.doubleClick(screen.getByTestId(category));
       expect(pushmocked).toEqual([]);
     });
-
     materials.map((material) => {
-      const input = screen.getByTestId(material);
-      fireEvent.click(input);
-      fireEvent.click(input);
+      fireEvent.doubleClick(screen.getByTestId(material));
       expect(pushmocked).toEqual([]);
     });
   });
