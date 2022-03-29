@@ -19,7 +19,7 @@ function Checkout() {
   const navigate = useNavigate();
   const { setOrder, setItemsCart } = useGlobal();
   const [status, setStatus] = useState(0);
-  const {width} = useDimensions()
+  const { width } = useDimensions();
   const [currentType, setCurrentType] = useState<
     "error" | "info" | "warning" | "success"
   >();
@@ -101,7 +101,7 @@ function Checkout() {
   ) : (
     <Wrap
       justify="center"
-      w={width <= 1000?"70%":"100%"}
+      w={width >= 1000 ? "70%" : "100%"}
       h="95%"
       overflowY="hidden"
       overflowX="hidden"

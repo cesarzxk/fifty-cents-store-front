@@ -37,6 +37,7 @@ function Item() {
       const [id, locale] = slug.split("-");
       const data = await getItem(locale, id);
       setItem(data);
+      console.log(data);
     }
   }
 
@@ -126,7 +127,7 @@ function Item() {
                   fontSize="12px"
                   fontFamily="Rounded Mplus 1c"
                 >
-                  -{parseInt(item?.discountValue) * 100}%
+                  -{parseFloat(item.discountValue) * 100}%
                 </Circle>
               )}
             </HStack>
