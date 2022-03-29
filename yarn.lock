@@ -4740,7 +4740,7 @@ eslint-webpack-plugin@^3.1.1:
     normalize-path "^3.0.0"
     schema-utils "^3.1.1"
 
-eslint@^8.11.0, eslint@^8.3.0:
+eslint@^8.3.0:
   version "8.11.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.11.0.tgz#88b91cfba1356fc10bb9eb592958457dfe09fb37"
   integrity sha512-/KRpd9mIRg2raGxHRGwW9ZywYNAClZrHjdueHcrVDuO3a6bj83eoTirCCk0M0yPwOjWYKHwRVRid+xK4F/GHgA==
@@ -5552,7 +5552,7 @@ idb@^6.1.4:
 
 identity-obj-proxy@^3.0.0:
   version "3.0.0"
-  resolved "https://registry.npmjs.org/identity-obj-proxy/-/identity-obj-proxy-3.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/identity-obj-proxy/-/identity-obj-proxy-3.0.0.tgz#94d2bda96084453ef36fbc5aaec37e0f79f1fc14"
   integrity sha1-lNK9qWCERT7zb7xarsN+D3nx/BQ=
   dependencies:
     harmony-reflect "^1.4.6"
@@ -6002,6 +6002,11 @@ jest-docblock@^27.5.1:
   dependencies:
     detect-newline "^3.0.0"
 
+jest-dom@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/jest-dom/-/jest-dom-4.0.0.tgz#94eba3cbc6576e7bd6821867c92d176de28920eb"
+  integrity sha512-gBxYZlZB1Jgvf2gP2pRfjjUWF8woGBHj/g5rAQgFPB/0K2atGuhVcPO+BItyjWeKg9zM+dokgcMOH01vrWVMFA==
+
 jest-each@^27.5.1:
   version "27.5.1"
   resolved "https://registry.npmjs.org/jest-each/-/jest-each-27.5.1.tgz"
@@ -6121,7 +6126,7 @@ jest-message-util@^27.5.1:
 
 jest-mock@^27.5.1:
   version "27.5.1"
-  resolved "https://registry.npmjs.org/jest-mock/-/jest-mock-27.5.1.tgz"
+  resolved "https://registry.yarnpkg.com/jest-mock/-/jest-mock-27.5.1.tgz#19948336d49ef4d9c52021d34ac7b5f36ff967d6"
   integrity sha512-K4jKbY1d4ENhbrG2zuPWaQBvDly+iZ2yAW+T1fATN78hc0sInwn7wZB8XtlNnvHug5RMwV897Xm4LqmPM4e2Og==
   dependencies:
     "@jest/types" "^27.5.1"
@@ -6321,7 +6326,7 @@ jest-worker@^27.0.2, jest-worker@^27.3.1, jest-worker@^27.4.5, jest-worker@^27.5
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
 
-jest@^27.4.3:
+jest@^27.4.3, jest@^27.5.1:
   version "27.5.1"
   resolved "https://registry.npmjs.org/jest/-/jest-27.5.1.tgz"
   integrity sha512-Yn0mADZB89zTtjkPJEXwrac3LHudkQMR+Paqa8uxJHCBr9agxztUifWCyiYrjhMPBoUVBjyny0I7XH6ozDr7QQ==
