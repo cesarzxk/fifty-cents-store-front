@@ -14,7 +14,7 @@ function Header() {
   const [isSearch, setIsSearch] = useState(false);
 
   function switchWidth() {
-    if (dimensions.width >= 1366) {
+    if (dimensions.width >= 1000) {
       return "70%";
     } else {
       return "100%";

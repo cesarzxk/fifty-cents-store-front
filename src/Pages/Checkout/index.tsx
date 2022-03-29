@@ -13,11 +13,13 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useNavigate } from "react-router-dom";
 
 import { useGlobal } from "../../Context/Global/GlobalContext";
+import useDimensions from "../../Hooks/useDimensions";
 
 function Checkout() {
   const navigate = useNavigate();
   const { setOrder, setItemsCart } = useGlobal();
   const [status, setStatus] = useState(0);
+  const {width} = useDimensions()
   const [currentType, setCurrentType] = useState<
     "error" | "info" | "warning" | "success"
   >();
@@ -99,7 +101,7 @@ function Checkout() {
   ) : (
     <Wrap
       justify="center"
-      w="70%"
+      w={width <= 1000?"70%":"100%"}
       h="95%"
       overflowY="hidden"
       overflowX="hidden"

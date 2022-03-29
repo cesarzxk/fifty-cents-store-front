@@ -107,7 +107,7 @@ function Cart() {
               templateColumns="6fr 3fr 3fr 0fr"
               alignItems="start"
               maxH="70vh"
-              overflowY="scroll"
+              overflowY="auto"
             >
               <GridItem fontWeight="bold" flex={6}>
                 Itens

@@ -88,8 +88,27 @@ export function GlobalProvider({ children }: globalProviderProps) {
   }, [filtersCategory, filtersMaterial, keyword]);
 
   function addItemtoCart(item: itemCartType) {
-    const newCart = [item, ...itemsCart.slice()];
-    setItemsCart(newCart);
+    let newCart = itemsCart.slice();
+    let isOnCart = false;
+
+    if(itemsCart.length > 0){
+      newCart = itemsCart.map((cartItem:itemCartType)=>{
+        if(cartItem.productId == item.productId){
+          const newCartItem = {
+            price:cartItem.price,
+            name:cartItem.name,
+            locale:cartItem.locale,
+            quantity: (cartItem.quantity+1),
+            productId:cartItem.productId
+          }
+          isOnCart=true
+          return newCartItem;
+        }
+        return cartItem;
+      })
+    }
+
+    isOnCart? setItemsCart(newCart):setItemsCart([item, ...newCart]);
   }
 
   useEffect(() => {

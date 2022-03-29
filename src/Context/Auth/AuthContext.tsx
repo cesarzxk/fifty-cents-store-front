@@ -124,12 +124,13 @@ export function AuthProvider({ children }: authProviderProps) {
       });
 
     if (status === 200) {
-      setUserInfo(data);
+      console.log(user)
+      setUserInfo(user);
       setToken(data.token);
       setCookie("token", data.token);
-      setCookie("name", data.name);
-      setCookie("email", data.email);
-      setCookie("lastname", data.lastname);
+      setCookie("name", user.name);
+      setCookie("email", user.email);
+      setCookie("lastname", user.lastname);
       setCookie("_id", data._id);
       setIsLogued(true);
     }

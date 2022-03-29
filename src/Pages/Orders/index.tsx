@@ -56,7 +56,7 @@ function Orders() {
   const dimensions = useDimensions();
 
   function switchWidth() {
-    if (dimensions.width >= 1366) {
+    if (dimensions.width >= 1000) {
       return "70%";
     } else {
       return "100%";
@@ -103,7 +103,7 @@ function Orders() {
         justify="center"
         h="85%"
         w={switchWidth()}
-        overflowY="scroll"
+        overflowY="auto"
         overflowX="hidden"
       >
         <WrapItem flexDirection="column" w="100%">
