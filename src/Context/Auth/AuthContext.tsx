@@ -124,7 +124,6 @@ export function AuthProvider({ children }: authProviderProps) {
       });
 
     if (status === 200) {
-      console.log(user)
       setUserInfo(user);
       setToken(data.token);
       setCookie("token", data.token);

@@ -45,7 +45,7 @@ function Item() {
       <CircularProgress size="100px" isIndeterminate color="yellow" />
     </Center>
   ) : (
-    <Flex height="100%" flex={6} justifyContent="center">
+    <Flex height="100%" overflowX="auto" flex={6} justifyContent="center">
       <VStack w="90%">
         <HStack w="100%" bg="WindowFrame" marginTop="2rem" marginBottom="3rem">
           <IconButton
@@ -164,8 +164,8 @@ function Item() {
           </Text>
 
           <Text fontFamily="Rounded Mplus 1c">{item?.description}</Text>
-          <br/>
-          <br/>
+          <br />
+          <br />
         </Box>
       </VStack>
     </Flex>

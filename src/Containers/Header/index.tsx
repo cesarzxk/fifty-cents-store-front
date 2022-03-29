@@ -26,7 +26,8 @@ function Header() {
       bg="gray.300"
       w={switchWidth()}
       h="5rem"
-      marginY="1rem"
+      marginTop={dimensions.width >= 1000 ? "1rem" : undefined}
+      marginBottom="1rem"
       paddingX="1rem"
       justifyContent="center"
       alignItems="center"
