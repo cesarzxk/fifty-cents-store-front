@@ -44,7 +44,7 @@ function LayoutFilter() {
   const dimensions = useDimensions();
 
   function switchHeight() {
-    if (dimensions.width >= 1366) {
+    if (dimensions.width >= 1000) {
       return "85.5%";
     } else {
       return "86%";
@@ -52,7 +52,7 @@ function LayoutFilter() {
   }
 
   function switchWidth() {
-    if (dimensions.width >= 1366) {
+    if (dimensions.width >= 1000) {
       return "70%";
     } else {
       return "100%";
@@ -60,7 +60,7 @@ function LayoutFilter() {
   }
 
   function switchFilter() {
-    if (dimensions.width >= 1366) {
+    if (dimensions.width >= 1000) {
       return <Filters />;
     } else {
       return <DrawerFilter />;

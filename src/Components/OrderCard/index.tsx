@@ -45,19 +45,20 @@ function OrderCard({ properties }: { properties: propertiesType }) {
 
               <Text flex={1}>
                 <b>Hora: </b>
-                {data.getMinutes()}:{data.getHours()}
+                {data.getHours().toString().padStart(2, "0")}:
+                {data.getUTCMinutes().toString().padStart(2, "0")}
               </Text>
 
               <Text flex={1}>
                 <b>Data: </b>
-                {data.getDay()}/{data.getMonth()}/{data.getFullYear()}
+                {data.toLocaleDateString()}
               </Text>
             </HStack>
             <AccordionIcon />
           </AccordionButton>
         </h2>
 
-        <AccordionPanel maxH="10rem" overflowY="scroll">
+        <AccordionPanel maxH="10rem" overflowY="auto">
           <Grid templateColumns="4fr 3fr 1fr">
             <GridItem fontWeight="bold">Nome</GridItem>
             <GridItem fontWeight="bold">Quantidade</GridItem>

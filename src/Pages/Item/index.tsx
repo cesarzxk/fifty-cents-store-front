@@ -164,6 +164,8 @@ function Item() {
           </Text>
 
           <Text fontFamily="Rounded Mplus 1c">{item?.description}</Text>
+          <br/>
+          <br/>
         </Box>
       </VStack>
     </Flex>

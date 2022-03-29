@@ -15,7 +15,7 @@ function Home() {
   const dimensions = useDimensions();
 
   function switchJustify() {
-    if (dimensions.width >= 1366) {
+    if (dimensions.width >= 1000) {
       return "flex-start";
     } else {
       return "center";
@@ -29,7 +29,7 @@ function Home() {
   ) : (
     <Flex flex={6} height="100%">
       <Wrap
-        overflowY="scroll"
+        overflowY="auto"
         overflowX="hidden"
         height="100%"
         w="100%"

@@ -79,7 +79,7 @@ function Warnning({ status, setStatus, params }: warnningProps) {
   return status === 0 || status === 200 ? (
     <></>
   ) : (
-    <Alert data-testid="alert" position="absolute" status={currentType}>
+    <Alert data-testid="alert"  status={currentType}>
       <AlertIcon />
       <AlertDescription>{currentMsg}</AlertDescription>
 

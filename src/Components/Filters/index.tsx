@@ -83,6 +83,7 @@ function Filters() {
       flex="2"
       borderRadius="lg"
       justifyContent="center"
+      overflowY="auto"
     >
       <VStack w="95%" marginTop="1rem">
         <Text
@@ -117,6 +118,7 @@ function Filters() {
                 size="md"
                 border="1px solid rgb(255, 190, 7)"
                 borderRadius={15}
+                isChecked={filtersCategory.indexOf(category) != -1}
                 onChange={(event) =>
                   event.target.checked
                     ? adicionarFilterCategory(event.target.value)
@@ -151,6 +153,7 @@ function Filters() {
                 size="md"
                 border="1px solid rgb(255, 190, 7)"
                 borderRadius={15}
+                isChecked={filtersMaterial.indexOf(material) != -1}
                 onChange={(event) =>
                   event.target.checked
                     ? adicionarFilterMaterial(event.target.value)
