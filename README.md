@@ -139,7 +139,7 @@ $ yarn start
 
 ## 🤔 Como contribuir ?
 
-**Make a fork of this repository**
+**Fazer um fork desse repositorio**
 
 ```bash
 # Fork via GitHub linha de comando
