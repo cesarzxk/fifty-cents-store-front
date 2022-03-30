@@ -56,7 +56,6 @@ function Filters() {
     const newCategory = filtersCategory
       .slice()
       .filter((item) => item !== filter);
-    console.log(newCategory);
     setFiltersCategory(newCategory);
   }
 
@@ -119,10 +118,8 @@ function Filters() {
                 size="md"
                 border="1px solid rgb(255, 190, 7)"
                 borderRadius={15}
-                isChecked={
-                  filtersMaterial
-                    ? filtersCategory.indexOf(category) != -1
-                    : false
+                defaultChecked={
+                  filtersCategory?.indexOf(category) != -1 && true
                 }
                 onChange={(event) =>
                   event.target.checked
@@ -158,10 +155,8 @@ function Filters() {
                 size="md"
                 border="1px solid rgb(255, 190, 7)"
                 borderRadius={15}
-                isChecked={
-                  filtersMaterial
-                    ? filtersMaterial.indexOf(material) != -1
-                    : false
+                defaultChecked={
+                  filtersMaterial?.indexOf(material) != -1 && true
                 }
                 onChange={(event) =>
                   event.target.checked

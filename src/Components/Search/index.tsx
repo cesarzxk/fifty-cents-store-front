@@ -1,4 +1,4 @@
-import { Flex, Box, Input, IconButton, FormControl } from "@chakra-ui/react";
+import { Flex, Box, Input, IconButton } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import react from "react";
 
@@ -21,7 +21,7 @@ function Search({ onBlur, autoFocus = false }: searchProps) {
     <Flex>
       <Box onBlur={onBlur} flex={1} display="flex" flexDirection="row">
         <Input
-          placeholder="Não encontrou?Busque!"
+          placeholder="Não encontrou? Busque!"
           value={value}
           autoFocus={autoFocus}
           data-testid="searchInput"

@@ -65,7 +65,7 @@ describe("component Filters", () => {
 
     let pushmocked = [""];
 
-    useGlobalMocked.mockReturnValueOnce({
+    useGlobalMocked.mockReturnValue({
       setFiltersCategory(category: []) {
         pushmocked = category;
       },
@@ -97,7 +97,7 @@ describe("component Filters", () => {
 
     let pushmocked = [] as any;
 
-    useGlobalMocked.mockReturnValue({
+    useGlobalMocked.mockReturnValueOnce({
       setFiltersCategory(category: []) {
         pushmocked = category;
       },
@@ -111,11 +111,18 @@ describe("component Filters", () => {
     render(<Filters />);
 
     categorys.map((category) => {
-      fireEvent.doubleClick(screen.getByTestId(category));
+      fireEvent.click(screen.getByTestId(category));
+
+      fireEvent.click(screen.getByTestId(category));
+
       expect(pushmocked).toEqual([]);
     });
+
     materials.map((material) => {
-      fireEvent.doubleClick(screen.getByTestId(material));
+      fireEvent.click(screen.getByTestId(material));
+
+      fireEvent.click(screen.getByTestId(material));
+
       expect(pushmocked).toEqual([]);
     });
   });
