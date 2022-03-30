@@ -53,11 +53,14 @@ Imagens do aplicativo em operação via desktop.
 <p align="center">
 <img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639552/prints/Captura_de_tela_2022-03-30_081846_cmtefy.png" width="300px">
 <img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639552/prints/Captura_de_tela_2022-03-30_081900_ahrpv6.png" width="300px">
-<img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639552/prints/Captura_de_tela_2022-03-30_081751_sdkjcv.png" width="300px">
 </p>
 
 <p align="center">
+<img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639552/prints/Captura_de_tela_2022-03-30_081751_sdkjcv.png" width="300px">
 <img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639552/prints/Captura_de_tela_2022-03-30_081723_dzx62a.png" width="300px">
+</p>
+
+<p align="center">
 <img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639551/prints/Captura_de_tela_2022-03-30_081634_umeljm.png" width="300px">
 <img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639551/prints/Captura_de_tela_2022-03-30_081607_p5ahsd.png" width="300px">
 </p>
