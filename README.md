@@ -44,7 +44,7 @@
 
 ## 💇🏼 Sobre o projeto
 
-Essa aplicação visa solucionar um problema imposto via um desafio fullstack, onde foi realizado a criação de uma interface funcional de um marketplace, onde é possivel realizar operações em conjunto a um back-end de filtragem, pedidos e consultas de pedidos.
+Essa aplicação visa solucionar um problema imposto via um desafio fullstack, onde foi realizado a criação de uma interface funcional de um marketplace, onde é possível realizar operações em conjunto a um back-end de filtragem, pedidos e consultas de pedidos.
 
 ## 📸 Capturas de tela via Web
 
@@ -87,9 +87,9 @@ Imagens do aplicativo em operação via mobile.
 <img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648641301/prints/mobile/Screenshot_2022-03-30-08-52-35-090_com.android.chrome_kp5bqg.jpg" width="170px">
 </p>
 
-## 🚀 Técnologias
+## 🚀 Tecnologias
 
-As seguintes tecnologias foram utilizadar para desenvolver esse projeto:
+As seguintes tecnologias que foram utilizadas para desenvolver esse projeto:
 
 - [React](https://reactjs.org/)
 - [Node.js](https://nodejs.org/en/)
@@ -101,7 +101,7 @@ As seguintes tecnologias foram utilizadar para desenvolver esse projeto:
 
 ## 🧪 Testes - Coverage
 
-<p align="justify">Nesse projeto foi implementado testes em todos componentes e containers de extensão tsx.  Adicionalmente, foi utilizado uma ferramenta de cobertura, que demonstra a cobertura dos teste realizados como demonstrado asseguir <a href="https://cesarzxk.github.io/fifty-cents-store-front/">aqui</a>.</p>
+<p align="justify">Nesse projeto foi implementado testes em todos componentes e containers de extensão tsx.  Adicionalmente, foi utilizado uma ferramenta de cobertura, que demonstra a cobertura dos testes realizados como demonstrado a seguir <a href="https://cesarzxk.github.io/fifty-cents-store-front/">aqui</a>.</p>
 
 <p align="center">
 <img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648645074/prints/mobile/Captura_de_tela_2022-03-30_095617_sejlzb.png" width="800px">
@@ -113,6 +113,7 @@ As seguintes tecnologias foram utilizadar para desenvolver esse projeto:
 
 - [Node.js](https://nodejs.org/en/)
 - [Yarn](https://classic.yarnpkg.com/) or [npm](https://www.npmjs.com/)
+- [back-end](https://github.com/cesarzxk/fifty-cents-store-back)
 
 **Clone o projeto e acesse a pasta**
 
@@ -127,7 +128,7 @@ $ git clone https://github.com/cesarzxk/fifty-cents-store-front.git
 
 const development = true;
 
-//todas as rotas podem ser modificadas apartir desse arquivo.
+//todas as rotas podem ser modificadas a partir desse arquivo.
 ```
 
 **Após as devidas alterações siga o passo a baixo**
@@ -142,7 +143,7 @@ $ yarn start
 
 ## 🤔 Como contribuir ?
 
-**Fazer um fork desse repositorio**
+**Fazer um fork desse repositório**
 
 ```bash
 # Fork via GitHub linha de comando
