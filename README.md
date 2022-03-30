@@ -101,7 +101,7 @@ As seguintes tecnologias foram utilizadar para desenvolver esse projeto:
 
 ## 🧪 Testes - Coverage
 
-<p align="justify">Nesse projeto foi implementado testes em todos componentes e containers de extensão tsx.  Adicionalmente, foi utilizado uma ferramenta de cobertura, que demonstra a cobertura dos teste realizados como demonstrado asseguir <a href="/coverage/lcov-report/index.html">aqui</a>.</p>
+<p align="justify">Nesse projeto foi implementado testes em todos componentes e containers de extensão tsx.  Adicionalmente, foi utilizado uma ferramenta de cobertura, que demonstra a cobertura dos teste realizados como demonstrado asseguir <a href="https://cesarzxk.github.io/fifty-cents-store-front/">aqui</a>.</p>
 
 <p align="center">
 <img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648645074/prints/mobile/Captura_de_tela_2022-03-30_095617_sejlzb.png" width="800px">
