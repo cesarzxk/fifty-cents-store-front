@@ -60,6 +60,26 @@ describe("component Filters", () => {
     });
   });
 
+  it("should buttoms price sort have been clicked", () => {
+    const useGlobalMocked = mocked(useGlobal);
+    let pushmocked = undefined;
+
+    useGlobalMocked.mockReturnValue({
+      setSort: (data: string) => (pushmocked = data),
+      sort: pushmocked,
+    } as any);
+
+    render(<Filters />);
+
+    let input = screen.getByTestId("biggerButtom");
+    fireEvent.click(input);
+    expect(pushmocked).toEqual("bigger");
+
+    input = screen.getByTestId("smallerButtom");
+    fireEvent.click(input);
+    expect(pushmocked).toEqual("smaller");
+  });
+
   it("should input is enabled add filter", () => {
     const useGlobalMocked = mocked(useGlobal);
 
