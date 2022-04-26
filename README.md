@@ -173,7 +173,7 @@ Após seu o merged do seu pull request, você poderá excluir sua branch.
 
 ## 📝 Licença
 
-Esse projeto possui licença MIT - veja sobre [LICENSE](LICENSE) arquivo para detalhes.
+Esse projeto possui licença Apache 2.0 - veja sobre [LICENSE](LICENSE) arquivo para detalhes.
 
 ---
 
