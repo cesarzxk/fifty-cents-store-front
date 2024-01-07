@@ -4,7 +4,7 @@ const development = false;
 
 const baseurl = development
   ? "http://localhost:3333/"
-  : "https://fifty-cents-store.herokuapp.com/";
+  : "https://fifty-cents-store-back.onrender.com/";
 
 export const order = axios.create({
   baseURL: baseurl + "order",
