@@ -32,19 +32,19 @@
 </p>
 
 <p align="center">
-  <a href="#%EF%B8%8F-sobre-o-projeto">Sobre o projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-capturas-de-tela-via-Web">Capturas Web</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-sobre-o-projeto">Sobre o projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-capturas-de-tela-via-web">Capturas Web</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-capturas-de-tela-via-web-mobile">Capturas Mobile</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-técnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-testes">Testes</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-como-iniciar-?">Iniciar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-como-contribuir-?">Como contribuir</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-testes---coverage">Testes</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-como-iniciar-">Iniciar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-como-contribuir-">Como contribuir</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-licença">Licença</a>
 </p>
 
 ## 💇🏼 Sobre o projeto
 
-Essa aplicação visa solucionar um problema imposto via um desafio fullstack, onde foi realizado a criação de uma interface funcional de um marketplace, onde é possivel realizar operações em conjunto a um back-end de filtragem, pedidos e consultas de pedidos.
+Essa aplicação visa solucionar um problema imposto via um desafio fullstack, onde foi realizado a criação de uma interface funcional de um marketplace, onde é possível realizar operações em conjunto a um back-end de filtragem, pedidos e consultas de pedidos.
 
 ## 📸 Capturas de tela via Web
 
@@ -53,11 +53,14 @@ Imagens do aplicativo em operação via desktop.
 <p align="center">
 <img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639552/prints/Captura_de_tela_2022-03-30_081846_cmtefy.png" width="300px">
 <img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639552/prints/Captura_de_tela_2022-03-30_081900_ahrpv6.png" width="300px">
-<img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639552/prints/Captura_de_tela_2022-03-30_081751_sdkjcv.png" width="300px">
 </p>
 
 <p align="center">
+<img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639552/prints/Captura_de_tela_2022-03-30_081751_sdkjcv.png" width="300px">
 <img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639552/prints/Captura_de_tela_2022-03-30_081723_dzx62a.png" width="300px">
+</p>
+
+<p align="center">
 <img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639551/prints/Captura_de_tela_2022-03-30_081634_umeljm.png" width="300px">
 <img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639551/prints/Captura_de_tela_2022-03-30_081607_p5ahsd.png" width="300px">
 </p>
@@ -84,9 +87,9 @@ Imagens do aplicativo em operação via mobile.
 <img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648641301/prints/mobile/Screenshot_2022-03-30-08-52-35-090_com.android.chrome_kp5bqg.jpg" width="170px">
 </p>
 
-## 🚀 Técnologias
+## 🚀 Tecnologias
 
-As seguintes tecnologias foram utilizadar para desenvolver esse projeto:
+As seguintes tecnologias que foram utilizadas para desenvolver esse projeto:
 
 - [React](https://reactjs.org/)
 - [Node.js](https://nodejs.org/en/)
@@ -98,7 +101,7 @@ As seguintes tecnologias foram utilizadar para desenvolver esse projeto:
 
 ## 🧪 Testes - Coverage
 
-<p align="justify">Nesse projeto foi implementado testes em todos componentes e containers de extensão tsx.  Adicionalmente, foi utilizado uma ferramenta de cobertura, que demonstra a cobertura dos teste realizados como demonstrado asseguir <a href="/coverage/lcov-report/index.html">aqui</a>.</p>
+<p align="justify">Nesse projeto foi implementado testes em todos componentes e containers de extensão tsx.  Adicionalmente, foi utilizado uma ferramenta de cobertura, que demonstra a cobertura dos testes realizados como demonstrado a seguir <a href="https://cesarzxk.github.io/fifty-cents-store-front/">aqui</a>.</p>
 
 <p align="center">
 <img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648645074/prints/mobile/Captura_de_tela_2022-03-30_095617_sejlzb.png" width="800px">
@@ -110,6 +113,7 @@ As seguintes tecnologias foram utilizadar para desenvolver esse projeto:
 
 - [Node.js](https://nodejs.org/en/)
 - [Yarn](https://classic.yarnpkg.com/) or [npm](https://www.npmjs.com/)
+- [back-end](https://github.com/cesarzxk/fifty-cents-store-back)
 
 **Clone o projeto e acesse a pasta**
 
@@ -124,7 +128,7 @@ $ git clone https://github.com/cesarzxk/fifty-cents-store-front.git
 
 const development = true;
 
-//todas as rotas podem ser modificadas apartir desse arquivo.
+//todas as rotas podem ser modificadas a partir desse arquivo.
 ```
 
 **Após as devidas alterações siga o passo a baixo**
@@ -139,7 +143,7 @@ $ yarn start
 
 ## 🤔 Como contribuir ?
 
-**Make a fork of this repository**
+**Fazer um fork desse repositório**
 
 ```bash
 # Fork via GitHub linha de comando
@@ -169,7 +173,7 @@ Após seu o merged do seu pull request, você poderá excluir sua branch.
 
 ## 📝 Licença
 
-Esse projeto possui licença MIT - veja sobre [LICENSE](LICENSE) arquivo para detalhes.
+Esse projeto possui licença Apache 2.0 - veja sobre [LICENSE](LICENSE) arquivo para detalhes.
 
 ---
 

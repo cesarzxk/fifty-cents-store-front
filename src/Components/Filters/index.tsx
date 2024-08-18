@@ -6,9 +6,10 @@ import {
   Text,
   Spacer,
   Flex,
+  Button,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
 import { useGlobal } from "../../Context/Global/GlobalContext";
+import { BsSortDown, BsSortDownAlt } from "react-icons/bs";
 
 function Filters() {
   const {
@@ -16,6 +17,8 @@ function Filters() {
     filtersMaterial,
     setFiltersCategory,
     setFiltersMaterial,
+    setSort,
+    sort,
   } = useGlobal();
 
   const materials = [
@@ -94,6 +97,32 @@ function Filters() {
         >
           Filters
         </Text>
+
+        <Text fontWeight="700" fontFamily="M PLUS Rounded 1c">
+          Preço
+        </Text>
+
+        <Flex flexDirection="row" gap="10%">
+          <Button
+            onClick={() => {
+              setSort("bigger");
+            }}
+            data-testid="biggerButtom"
+            disabled={sort == "bigger"}
+          >
+            <BsSortDown size={34} />
+          </Button>
+
+          <Button
+            onClick={() => {
+              setSort("smaller");
+            }}
+            data-testid="smallerButtom"
+            disabled={sort == "smaller"}
+          >
+            <BsSortDownAlt size={34} />
+          </Button>
+        </Flex>
 
         <Text fontWeight="700" fontFamily="M PLUS Rounded 1c">
           Categoria

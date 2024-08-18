@@ -11,6 +11,7 @@ type globalContextData = {
   keyword: string;
   itemsCart: itemCartType[] | [];
   totalCartPrice: number;
+  sort: sortType;
   setFiltersMaterial: (filterCategory: string[]) => void;
   setFiltersCategory: (filterCategory: string[]) => void;
   getItem: (locale: string, id: string) => Promise<productType>;
@@ -19,6 +20,7 @@ type globalContextData = {
   setItemsCart: (items: itemCartType[] | []) => void;
   addItemtoCart: (item: itemCartType) => void;
   setOrder: () => Promise<number>;
+  setSort: (sortType: sortType) => void;
 };
 
 export const GlobalContext = createContext({} as globalContextData);
@@ -70,6 +72,8 @@ type itemCartType = {
   quantity: number;
 };
 
+type sortType = "bigger" | "smaller" | undefined;
+
 export function GlobalProvider({ children }: globalProviderProps) {
   const { userInfo, token } = useAuth();
 
@@ -80,35 +84,36 @@ export function GlobalProvider({ children }: globalProviderProps) {
   const [keyword, setKeyword] = useState("");
   const [itemsCart, setItemsCart] = useState<itemCartType[] | []>([]);
   const [totalCartPrice, setTotalPriceCart] = useState<number>(0);
+  const [sort, setSort] = useState<sortType>(undefined);
 
   useMemo(() => {
     if (keyword || filtersMaterial || filtersCategory) {
-      bindLists();
+      getItems(["european", "brazilian"]);
     }
-  }, [filtersCategory, filtersMaterial, keyword]);
+  }, [filtersCategory, filtersMaterial, keyword, sort]);
 
   function addItemtoCart(item: itemCartType) {
     let newCart = itemsCart.slice();
     let isOnCart = false;
 
-    if(itemsCart.length > 0){
-      newCart = itemsCart.map((cartItem:itemCartType)=>{
-        if(cartItem.productId == item.productId){
+    if (itemsCart.length > 0) {
+      newCart = itemsCart.map((cartItem: itemCartType) => {
+        if (cartItem.productId == item.productId) {
           const newCartItem = {
-            price:cartItem.price,
-            name:cartItem.name,
-            locale:cartItem.locale,
-            quantity: (cartItem.quantity+1),
-            productId:cartItem.productId
-          }
-          isOnCart=true
+            price: cartItem.price,
+            name: cartItem.name,
+            locale: cartItem.locale,
+            quantity: cartItem.quantity + 1,
+            productId: cartItem.productId,
+          };
+          isOnCart = true;
           return newCartItem;
         }
         return cartItem;
-      })
+      });
     }
 
-    isOnCart? setItemsCart(newCart):setItemsCart([item, ...newCart]);
+    isOnCart ? setItemsCart(newCart) : setItemsCart([item, ...newCart]);
   }
 
   useEffect(() => {
@@ -121,18 +126,7 @@ export function GlobalProvider({ children }: globalProviderProps) {
     setTotalPriceCart(vetor);
   }
 
-  async function bindLists() {
-    const brazillianItems = await getItems("brazilian");
-    const europeanItems = await getItems("european");
-
-    if (brazillianItems && europeanItems) {
-      const AllProducts = [...brazillianItems, ...europeanItems];
-      return setProducts(AllProducts);
-    }
-    return setProducts([]);
-  }
-
-  async function getItems(locale: string) {
+  async function getItems(locale: string[]) {
     const { data } = await items
       .get("", {
         params: {
@@ -140,6 +134,7 @@ export function GlobalProvider({ children }: globalProviderProps) {
           material: filtersMaterial,
           category: filtersCategory,
           search: keyword == "" ? undefined : keyword,
+          orderlyBy: sort,
         },
       })
       .then((result) => {
@@ -155,14 +150,14 @@ export function GlobalProvider({ children }: globalProviderProps) {
         };
       });
 
-    return data as productType[];
+    setProducts(data);
   }
 
   async function getItem(locale: string, id: string) {
     const { data } = await items
       .get("", {
         params: {
-          locale: locale,
+          locale: [locale],
           id: id,
         },
       })
@@ -179,7 +174,7 @@ export function GlobalProvider({ children }: globalProviderProps) {
         };
       });
 
-    return data as productType;
+    return data[0] as productType;
   }
 
   async function getOrders() {
@@ -244,6 +239,7 @@ export function GlobalProvider({ children }: globalProviderProps) {
         keyword,
         itemsCart,
         totalCartPrice,
+        sort,
         setFiltersMaterial,
         setFiltersCategory,
         getItem,
@@ -252,6 +248,7 @@ export function GlobalProvider({ children }: globalProviderProps) {
         setItemsCart,
         addItemtoCart,
         setOrder,
+        setSort,
       }}
     >
       {children}
