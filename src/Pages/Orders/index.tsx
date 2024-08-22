@@ -1,7 +1,5 @@
 import {
   Accordion,
-  Center,
-  CircularProgress,
   Flex,
   HStack,
   IconButton,
@@ -18,8 +16,8 @@ import { useNavigate } from "react-router-dom";
 import OrderCard from "../../Components/OrderCard";
 import { useEffect, useState } from "react";
 import { useGlobal } from "../../Context/Global/GlobalContext";
-import useDimensions from "../../Hooks/useDimensions";
 import Warnning from "../../Components/Warnning";
+import { Loading } from "../../Components/Loading";
 
 type itemsType = {
   productId: number;
@@ -60,9 +58,7 @@ function Orders() {
         status={ordersLoadingStatus}
         setStatus={setOrdersLoadingStatus}
       />
-      <Center w="100%" flex={6}>
-        <CircularProgress size="100px" isIndeterminate color="yellow" />
-      </Center>
+      <Loading />
     </>
   ) : (
     <VStack px="1rem" w="100%" h="100%">

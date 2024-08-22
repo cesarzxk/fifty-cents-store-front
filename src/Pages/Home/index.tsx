@@ -1,20 +1,14 @@
-import {
-  Center,
-  CircularProgress,
-  Flex,
-  Wrap,
-  WrapItem,
-} from "@chakra-ui/react";
+import { Flex, Wrap, WrapItem } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import ItemCard from "../../Components/ItemCard";
 import { useGlobal } from "../../Context/Global/GlobalContext";
 import { useGetProducts } from "../../Hooks/useGetProducts";
-import useDimensions from "../../Hooks/useDimensions";
+
+import { Loading } from "../../Components/Loading";
 
 function Home() {
   const { filtersCategory, filtersMaterial, keyword, sort } = useGlobal();
 
-  const dimensions = useDimensions();
   const { data, isLoading } = useGetProducts({
     category: filtersCategory,
     material: filtersMaterial,
@@ -23,9 +17,7 @@ function Home() {
   });
 
   return isLoading ? (
-    <Center w="100%" flex={6}>
-      <CircularProgress size="100px" isIndeterminate color="yellow" />
-    </Center>
+    <Loading />
   ) : (
     <Flex flex={6} height="100%">
       <Wrap

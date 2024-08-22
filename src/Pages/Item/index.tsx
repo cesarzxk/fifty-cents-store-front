@@ -1,8 +1,6 @@
 import {
   Box,
-  Center,
   Circle,
-  CircularProgress,
   Flex,
   Grid,
   GridItem,
@@ -18,10 +16,10 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { MdAddShoppingCart, MdArrowBack } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 import { useGlobal } from "../../Context/Global/GlobalContext";
 import { useGetProducts } from "../../Hooks/useGetProducts";
+import { Loading } from "../../Components/Loading";
 
 function Item() {
   let { slug } = useParams<"slug">();
@@ -43,9 +41,7 @@ function Item() {
   // }
 
   return !item ? (
-    <Center w="100%" flex={6}>
-      <CircularProgress size="100px" isIndeterminate color="yellow" />
-    </Center>
+    <Loading />
   ) : (
     <Flex height="100%" overflowX="auto" flex={6} justifyContent="center">
       <VStack w="90%">
