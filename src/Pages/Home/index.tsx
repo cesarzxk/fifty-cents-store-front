@@ -8,21 +8,21 @@ import {
 import { Link } from "react-router-dom";
 import ItemCard from "../../Components/ItemCard";
 import { useGlobal } from "../../Context/Global/GlobalContext";
+import { useGetProducts } from "../../Hooks/useGetProducts";
 import useDimensions from "../../Hooks/useDimensions";
 
 function Home() {
-  const { products } = useGlobal();
+  const { filtersCategory, filtersMaterial, keyword, sort } = useGlobal();
+
   const dimensions = useDimensions();
+  const { data, isLoading } = useGetProducts({
+    category: filtersCategory,
+    material: filtersMaterial,
+    search: keyword,
+    orderlyBy: sort,
+  });
 
-  function switchJustify() {
-    if (dimensions.width >= 1000) {
-      return "flex-start";
-    } else {
-      return "center";
-    }
-  }
-
-  return !products ? (
+  return isLoading ? (
     <Center w="100%" flex={6}>
       <CircularProgress size="100px" isIndeterminate color="yellow" />
     </Center>
@@ -34,12 +34,13 @@ function Home() {
         height="100%"
         w="100%"
         marginLeft="1rem"
-        justify={switchJustify()}
+        paddingTop="1rem"
+        justify={{ base: "center", md: "flex-start" }}
       >
-        {products?.map((item) => (
+        {data?.map((item: any) => (
           <Link
-            key={`${item.id}-${item.locale}`}
-            to={`/home/${item.id}-${item.locale}`}
+            key={`${item?.id}-${item?.locale}`}
+            to={`/home/${item?.id}-${item?.locale}`}
           >
             <WrapItem>
               <ItemCard property={item} />
