@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useGlobal } from "../../Context/Global/GlobalContext";
 import { BsSortDown, BsSortDownAlt } from "react-icons/bs";
+import { useParams } from "react-router-dom";
 
 function Filters() {
   const {
@@ -79,126 +80,154 @@ function Filters() {
     setFiltersMaterial(newMaterial);
   }
 
+  let { slug } = useParams<"slug">();
+
   return (
     <Flex
-      bg="gray.300"
+      bg="#333232"
       h="100%"
-      flex="2"
-      borderRadius="lg"
-      justifyContent="center"
+      flex="1"
+      minW="16.625rem"
+      justifyContent="normal"
       overflowY="auto"
+      color="#fff"
+      p="1%"
+      flexDir="column"
+      gap="2rem"
     >
-      <VStack w="95%" marginTop="1rem">
-        <Text
-          fontWeight="bold"
-          fontFamily="M PLUS Rounded 1c"
-          fontSize={25}
-          alignSelf="start"
-        >
-          Filters
-        </Text>
-
-        <Text fontWeight="700" fontFamily="M PLUS Rounded 1c">
-          Preço
-        </Text>
-
-        <Flex flexDirection="row" gap="10%">
-          <Button
-            onClick={() => {
-              setSort("bigger");
-            }}
-            data-testid="biggerButtom"
-            disabled={sort == "bigger"}
+      {!slug && (
+        <>
+          <Text
+            fontWeight="bold"
+            fontFamily="M PLUS Rounded 1c"
+            fontSize={25}
+            alignSelf="start"
           >
-            <BsSortDown size={34} />
-          </Button>
+            Filters
+          </Text>
+          <VStack gap="0.5rem">
+            <Text fontWeight="700" fontFamily="M PLUS Rounded 1c">
+              Preço
+            </Text>
 
-          <Button
-            onClick={() => {
-              setSort("smaller");
-            }}
-            data-testid="smallerButtom"
-            disabled={sort == "smaller"}
-          >
-            <BsSortDownAlt size={34} />
-          </Button>
-        </Flex>
-
-        <Text fontWeight="700" fontFamily="M PLUS Rounded 1c">
-          Categoria
-        </Text>
-
-        <Wrap borderRadius="md" justify="center">
-          {categorys.map((category) => (
-            <WrapItem key={category} w="45%" h="25px">
-              <Text
-                fontFamily="M PLUS Rounded 1c"
-                fontWeight="400"
-                fontSize="12px"
+            <Flex
+              flexDirection="row"
+              gap="0.5rem"
+              w="100%"
+              justifyContent="center"
+            >
+              <Button
+                onClick={() => {
+                  setSort("bigger");
+                }}
+                data-testid="biggerButtom"
+                color="white"
+                isDisabled={sort === "bigger"}
+                bgColor="black"
+                gap="0.5rem"
+                h="2rem"
               >
-                {category}
-              </Text>
+                <BsSortDown size={25} color="rgb(255, 190, 7)" />
+                <Text>Maior</Text>
+              </Button>
 
-              <Spacer />
-
-              <Switch
-                data-testid={category}
-                colorScheme="yellow"
-                size="md"
-                border="1px solid rgb(255, 190, 7)"
-                borderRadius={15}
-                defaultChecked={
-                  filtersCategory?.indexOf(category) != -1 && true
-                }
-                onChange={(event) =>
-                  event.target.checked
-                    ? adicionarFilterCategory(event.target.value)
-                    : removeFilterCategory(event.target.value)
-                }
-                value={category}
-              />
-            </WrapItem>
-          ))}
-        </Wrap>
-
-        <Text fontWeight="700" fontFamily="M PLUS Rounded 1c">
-          Material
-        </Text>
-
-        <Wrap borderRadius="md" justify="center">
-          {materials.map((material) => (
-            <WrapItem key={material} w="45%" h="25px">
-              <Text
-                fontFamily="M PLUS Rounded 1c"
-                fontWeight="400"
-                fontSize="12px"
+              <Button
+                onClick={() => {
+                  setSort("smaller");
+                }}
+                data-testid="smallerButtom"
+                color="white"
+                isDisabled={sort === "smaller"}
+                bgColor="black"
+                gap="0.5rem"
+                h="2rem"
               >
-                {material}
-              </Text>
+                <BsSortDownAlt size={25} color="rgb(255, 190, 7)" />
+                <Text>Menor</Text>
+              </Button>
+            </Flex>
+          </VStack>
+          <VStack gap="0.5rem">
+            <Text fontWeight="700" fontFamily="M PLUS Rounded 1c">
+              Categoria
+            </Text>
 
-              <Spacer />
+            <Wrap borderRadius="md" justify="center">
+              {categorys.map((category) => (
+                <WrapItem key={category} w="45%" h="25px">
+                  <Text
+                    fontFamily="M PLUS Rounded 1c"
+                    fontWeight="400"
+                    fontSize="12px"
+                  >
+                    {category}
+                  </Text>
 
-              <Switch
-                data-testid={material}
-                colorScheme="yellow"
-                size="md"
-                border="1px solid rgb(255, 190, 7)"
-                borderRadius={15}
-                defaultChecked={
-                  filtersMaterial?.indexOf(material) != -1 && true
-                }
-                onChange={(event) =>
-                  event.target.checked
-                    ? adicionarFilterMaterial(event.target.value)
-                    : removeFilterMaterial(event.target.value)
-                }
-                value={material}
-              />
-            </WrapItem>
-          ))}
-        </Wrap>
-        <Spacer />
-      </VStack>
+                  <Spacer />
+
+                  <Switch
+                    data-testid={category}
+                    colorScheme="yellow"
+                    size="md"
+                    border="1px solid rgb(255, 190, 7)"
+                    borderRadius={15}
+                    defaultChecked={
+                      filtersCategory?.indexOf(category) != -1 && true
+                    }
+                    onChange={(event) =>
+                      event.target.checked
+                        ? adicionarFilterCategory(event.target.value)
+                        : removeFilterCategory(event.target.value)
+                    }
+                    value={category}
+                  />
+                </WrapItem>
+              ))}
+
+              <WrapItem w="45%" h="25px" />
+            </Wrap>
+          </VStack>
+          <VStack gap="0.5rem">
+            <Text fontWeight="700" fontFamily="M PLUS Rounded 1c">
+              Material
+            </Text>
+
+            <Wrap borderRadius="md" justify="center">
+              {materials.map((material) => (
+                <WrapItem key={material} w="45%" h="25px">
+                  <Text
+                    fontFamily="M PLUS Rounded 1c"
+                    fontWeight="400"
+                    fontSize="12px"
+                  >
+                    {material}
+                  </Text>
+
+                  <Spacer />
+
+                  <Switch
+                    data-testid={material}
+                    colorScheme="yellow"
+                    size="md"
+                    border="1px solid rgb(255, 190, 7)"
+                    borderRadius={15}
+                    defaultChecked={
+                      filtersMaterial?.indexOf(material) != -1 && true
+                    }
+                    onChange={(event) =>
+                      event.target.checked
+                        ? adicionarFilterMaterial(event.target.value)
+                        : removeFilterMaterial(event.target.value)
+                    }
+                    value={material}
+                  />
+                </WrapItem>
+              ))}
+              <WrapItem w="45%" h="25px" />
+            </Wrap>
+          </VStack>
+        </>
+      )}
     </Flex>
   );
 }

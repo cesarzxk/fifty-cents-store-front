@@ -1,3 +1,4 @@
+import { useDisclosure } from "@chakra-ui/react";
 import { AxiosError } from "axios";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { createContext, ReactNode } from "react";
@@ -5,13 +6,15 @@ import { items, order } from "../../Api";
 import { useAuth } from "../Auth/AuthContext";
 
 type globalContextData = {
-  products: productType[] | undefined;
   filtersMaterial: string[];
   filtersCategory: string[];
   keyword: string;
   itemsCart: itemCartType[] | [];
   totalCartPrice: number;
   sort: sortType;
+  isFiltersOpen: boolean;
+  onFiltersOpen: () => void;
+  onFiltersClose: () => void;
   setFiltersMaterial: (filterCategory: string[]) => void;
   setFiltersCategory: (filterCategory: string[]) => void;
   getItem: (locale: string, id: string) => Promise<productType>;
@@ -77,14 +80,13 @@ type sortType = "bigger" | "smaller" | undefined;
 export function GlobalProvider({ children }: globalProviderProps) {
   const { userInfo, token } = useAuth();
 
-  const [products, setProducts] = useState<productType[] | undefined>();
-
   const [filtersMaterial, setFiltersMaterial] = useState<string[]>([]);
   const [filtersCategory, setFiltersCategory] = useState<string[]>([]);
   const [keyword, setKeyword] = useState("");
   const [itemsCart, setItemsCart] = useState<itemCartType[] | []>([]);
   const [totalCartPrice, setTotalPriceCart] = useState<number>(0);
   const [sort, setSort] = useState<sortType>(undefined);
+  const { isOpen, onClose, onOpen } = useDisclosure();
 
   useMemo(() => {
     if (keyword || filtersMaterial || filtersCategory) {
@@ -127,30 +129,29 @@ export function GlobalProvider({ children }: globalProviderProps) {
   }
 
   async function getItems(locale: string[]) {
-    const { data } = await items
-      .get("", {
-        params: {
-          locale: locale,
-          material: filtersMaterial,
-          category: filtersCategory,
-          search: keyword == "" ? undefined : keyword,
-          orderlyBy: sort,
-        },
-      })
-      .then((result) => {
-        return {
-          status: result.status,
-          data: result.data,
-        };
-      })
-      .catch((e: AxiosError) => {
-        return {
-          status: e.response?.status ? e.response?.status : 0,
-          data: e.response?.data,
-        };
-      });
-
-    setProducts(data);
+    // const { data } = await items
+    //   .get("", {
+    //     params: {
+    //       locale: locale,
+    //       material: filtersMaterial,
+    //       category: filtersCategory,
+    //       search: keyword == "" ? undefined : keyword,
+    //       orderlyBy: sort,
+    //     },
+    //   })
+    //   .then((result) => {
+    //     return {
+    //       status: result.status,
+    //       data: result.data,
+    //     };
+    //   })
+    //   .catch((e: AxiosError) => {
+    //     return {
+    //       status: e.response?.status ? e.response?.status : 0,
+    //       data: e.response?.data,
+    //     };
+    //   });
+    // setProducts(data);
   }
 
   async function getItem(locale: string, id: string) {
@@ -233,13 +234,15 @@ export function GlobalProvider({ children }: globalProviderProps) {
   return (
     <GlobalContext.Provider
       value={{
-        products,
         filtersMaterial,
         filtersCategory,
         keyword,
         itemsCart,
         totalCartPrice,
         sort,
+        isFiltersOpen: isOpen,
+        onFiltersOpen: onOpen,
+        onFiltersClose: onClose,
         setFiltersMaterial,
         setFiltersCategory,
         getItem,

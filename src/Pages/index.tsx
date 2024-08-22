@@ -9,6 +9,10 @@ import Orders from "./Orders";
 import Checkout from "./Checkout";
 import useDimensions from "../Hooks/useDimensions";
 import DrawerFilter from "../Containers/DrawerFilter";
+import "../theme/global.css";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export default function Pages() {
   return (
@@ -34,30 +38,17 @@ function Layout() {
       display="flex"
       flexDirection="column"
     >
-      <Header />
-      <Outlet />
+      <QueryClientProvider client={new QueryClient()}>
+        <ReactQueryDevtools />
+        <Header />
+        <Outlet />
+      </QueryClientProvider>
     </Grid>
   );
 }
 
 function LayoutFilter() {
   const dimensions = useDimensions();
-
-  function switchHeight() {
-    if (dimensions.width >= 1000) {
-      return "85.5%";
-    } else {
-      return "86%";
-    }
-  }
-
-  function switchWidth() {
-    if (dimensions.width >= 1000) {
-      return "70%";
-    } else {
-      return "100%";
-    }
-  }
 
   function switchFilter() {
     if (dimensions.width >= 1000) {
@@ -71,8 +62,8 @@ function LayoutFilter() {
     <Flex
       display="flex"
       flexDirection="row"
-      height={switchHeight()}
-      w={switchWidth()}
+      height={"calc(100vh - 3rem)"}
+      w={"100%"}
     >
       {switchFilter()}
 

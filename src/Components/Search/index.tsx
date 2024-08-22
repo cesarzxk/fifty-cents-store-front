@@ -1,4 +1,4 @@
-import { Flex, Box, Input, IconButton } from "@chakra-ui/react";
+import { Flex, Box, Input, IconButton, Button } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import react from "react";
 
@@ -18,25 +18,34 @@ function Search({ onBlur, autoFocus = false }: searchProps) {
   }
 
   return (
-    <Flex>
-      <Box onBlur={onBlur} flex={1} display="flex" flexDirection="row">
-        <Input
-          placeholder="Não encontrou? Busque!"
-          value={value}
-          autoFocus={autoFocus}
-          data-testid="searchInput"
-          onChange={(event) => setValue(event.target.value)}
-        />
+    <Flex
+      display="flex"
+      flexDirection="row"
+      gap="0.5rem"
+      justifyContent="center"
+      alignItems="center"
+      w="100%"
+      maxW="350px"
+    >
+      <Input
+        placeholder="Não encontrou? Faça uma busca."
+        value={value}
+        autoFocus={autoFocus}
+        data-testid="searchInput"
+        onChange={(event) => setValue(event.target.value)}
+        maxH="2rem"
+        color="white"
+        borderColor="transparent"
+      />
 
-        <IconButton
-          borderWidth={1}
-          colorScheme="yellow"
-          data-testid="searchButton"
-          aria-label=""
-          icon={<SearchIcon />}
-          onClick={handlerSubmit}
-        />
-      </Box>
+      <IconButton
+        colorScheme="yellow"
+        data-testid="searchButton"
+        aria-label=""
+        icon={<SearchIcon />}
+        borderRadius="100%"
+        onClick={handlerSubmit}
+      />
     </Flex>
   );
 }

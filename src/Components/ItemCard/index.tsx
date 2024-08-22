@@ -1,4 +1,5 @@
-import { Badge, Box, Image } from "@chakra-ui/react";
+import { Badge, Box, Image, Skeleton } from "@chakra-ui/react";
+import { useState } from "react";
 import useDimensions from "../../Hooks/useDimensions";
 
 type item = {
@@ -15,24 +16,30 @@ type item = {
 };
 
 function ItemCard({ property }: { property: item }) {
+  const [isLoaded, setIsloaded] = useState(false);
   const dimensions = useDimensions();
-  function switchWidth() {
-    if (dimensions.width >= 700) {
-      return "13rem";
-    } else {
-      return "90%";
-    }
-  }
 
   return (
     <Box
       data-testid="container"
-      maxW={switchWidth()}
+      maxW={{ base: "99% ", sm: "23rem", md: "13rem" }}
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
     >
-      <Image src={property.images[0]} alt={property.name} />
+      {!isLoaded && (
+        <Skeleton
+          width={{ base: "90vw", md: 206 }}
+          height={{ base: 314, md: 155 }}
+        />
+      )}
+
+      <Image
+        src={property.images[0]}
+        alt={property.name}
+        loading="lazy"
+        onLoad={() => setIsloaded(true)}
+      />
 
       <Box p="2">
         <Box display="flex" alignItems="baseline">

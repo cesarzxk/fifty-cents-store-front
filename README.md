@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img alt="Logo" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648650340/prints/mobile/logo_vtups0.svg" width="300px">
+  <img alt="Logo" src="https://res.cloudinary.com/dnqsgv3l1/image/upload/v1724305600/Logo_ofvl2y.svg" width="300px">
  
 </h1>
 
@@ -51,40 +51,22 @@ Essa aplicação visa solucionar um problema imposto via um desafio fullstack, o
 Imagens do aplicativo em operação via desktop.
 
 <p align="center">
-<img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639552/prints/Captura_de_tela_2022-03-30_081846_cmtefy.png" width="300px">
-<img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639552/prints/Captura_de_tela_2022-03-30_081900_ahrpv6.png" width="300px">
+<img alt="ScreenShot01" src="https://res.cloudinary.com/dnqsgv3l1/image/upload/v1724305030/Captura_de_tela_2024-08-22_023147_wgzdlt.png" width="300px">
+<img alt="ScreenShot01" src="https://res.cloudinary.com/dnqsgv3l1/image/upload/v1724305030/Captura_de_tela_2024-08-22_023219_u9baks.png" width="300px">
 </p>
-
 <p align="center">
-<img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639552/prints/Captura_de_tela_2022-03-30_081751_sdkjcv.png" width="300px">
-<img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639552/prints/Captura_de_tela_2022-03-30_081723_dzx62a.png" width="300px">
-</p>
+<img alt="ScreenShot01" src="https://res.cloudinary.com/dnqsgv3l1/image/upload/v1724305029/Captura_de_tela_2024-08-22_023333_qxf670.png" width="300px">
 
-<p align="center">
-<img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639551/prints/Captura_de_tela_2022-03-30_081634_umeljm.png" width="300px">
-<img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639551/prints/Captura_de_tela_2022-03-30_081607_p5ahsd.png" width="300px">
 </p>
-
-<p align="center">
-<img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639551/prints/Captura_de_tela_2022-03-30_081518_wjrrhy.png" width="300px">
-<img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648639551/prints/Captura_de_tela_2022-03-30_081548_mnz9zy.png" width="
-00px">
-</p>
-
 ## 📸 Capturas de tela via Web Mobile
 
 Imagens do aplicativo em operação via mobile.
 
 <p align="center">
-<img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648641301/prints/mobile/Screenshot_2022-03-30-08-51-37-303_com.android.chrome_skhsvq.jpg" width="170px">
-<img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648641301/prints/mobile/Screenshot_2022-03-30-08-51-49-818_com.android.chrome_xddcgj.jpg" width="170px">
-<img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648641301/prints/mobile/Screenshot_2022-03-30-08-51-56-625_com.android.chrome_nrzoa4.jpg" width="170px">
-<img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648641301/prints/mobile/Screenshot_2022-03-30-08-52-49-757_com.android.chrome_ho7blp.jpg" width="170px">
-</p>
-
-<p align="center">
+<img alt="ScreenShot01" src="https://res.cloudinary.com/dnqsgv3l1/image/upload/v1724305030/Captura_de_tela_2024-08-22_023457_a0jkkb.png" width="170px">
+<img alt="ScreenShot01" src="https://res.cloudinary.com/dnqsgv3l1/image/upload/v1724305030/Captura_de_tela_2024-08-22_023204_szvxtg.png" width="170px">
 <img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648641301/prints/mobile/Screenshot_2022-03-30-08-52-05-201_com.android.chrome_prlsxq.jpg" width="170px">
-<img alt="ScreenShot01" src="https://res.cloudinary.com/da91uwz7j/image/upload/v1648641301/prints/mobile/Screenshot_2022-03-30-08-52-35-090_com.android.chrome_kp5bqg.jpg" width="170px">
+
 </p>
 
 ## 🚀 Tecnologias
@@ -98,6 +80,8 @@ As seguintes tecnologias que foram utilizadas para desenvolver esse projeto:
 - [Chakra-ui](https://chakra-ui.com/)
 - [Testing Library](https://testing-library.com/docs/)
 - [Jest](https://jestjs.io/)
+- [Bun](https://bun.sh/)
+- [TanStack Query](https://tanstack.com/query/latest)
 
 ## 🧪 Testes - Coverage
 
@@ -135,10 +119,10 @@ const development = true;
 
 ```bash
 # Para instalar as dependências
-$ yarn
+$ bun i
 
 # Ao finalizar, rodar o web-app
-$ yarn start
+$ bun start
 ```
 
 ## 🤔 Como contribuir ?

@@ -65,7 +65,6 @@ function Cart() {
       <IconButton
         aria-label=""
         borderRadius={100}
-        size="lg"
         bg="#000"
         onClick={() => onOpen()}
         data-testid="cartButton"

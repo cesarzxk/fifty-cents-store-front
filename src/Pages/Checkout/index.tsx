@@ -101,8 +101,8 @@ function Checkout() {
   ) : (
     <Wrap
       justify="center"
-      w={width >= 1000 ? "70%" : "100%"}
-      h="95%"
+      w={"100%"}
+      h="100%"
       overflowY="hidden"
       overflowX="hidden"
     >
@@ -113,7 +113,7 @@ function Checkout() {
         alignItems="center"
         justifyContent="center"
         textAlign="center"
-        h="85vh"
+        h="calc(100vh - 3rem)"
       >
         <AlertIcon boxSize="40px" mr={0} />
         <AlertTitle mt={4} mb={1} fontSize="lg">
