@@ -6,6 +6,7 @@ import {
   HStack,
   IconButton,
   Text,
+  VStack,
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
@@ -53,16 +54,6 @@ function Orders() {
     setItems(data);
   }
 
-  const dimensions = useDimensions();
-
-  function switchWidth() {
-    if (dimensions.width >= 1000) {
-      return "70%";
-    } else {
-      return "100%";
-    }
-  }
-
   return !items ? (
     <>
       <Warnning
@@ -74,35 +65,42 @@ function Orders() {
       </Center>
     </>
   ) : (
-    <>
+    <VStack px="1rem" w="100%" h="100%">
       <Warnning
         status={ordersLoadingStatus}
         setStatus={setOrdersLoadingStatus}
       />
-      <HStack  flexDir="row" bg="WindowFrame" w={switchWidth()} marginBottom="1rem" >
-            <IconButton
-              aria-label=""
-              borderRadius={0}
-              h="100%"
-              colorScheme="yellow"
-              onClick={() => navigate("/")}
-              icon={<MdArrowBack />}
-            />
-            <Text
-              fontSize="30px"
-              fontWeight="bold"
-              marginLeft="1rem"
-              fontFamily="Rounded Mplus 1c"
-              bg="WindowFrame"
-            >
-              Pedidos
-            </Text>
-          </HStack>
+      <HStack
+        flexDir="row"
+        bg="WindowFrame"
+        w={{ base: "100%", md: "90%" }}
+        marginBottom="1rem"
+        marginTop="1rem"
+      >
+        <IconButton
+          aria-label=""
+          borderRadius={0}
+          h="100%"
+          colorScheme="yellow"
+          onClick={() => navigate("/")}
+          icon={<MdArrowBack />}
+        />
+        <Text
+          fontSize="30px"
+          fontWeight="bold"
+          marginLeft="1rem"
+          fontFamily="Rounded Mplus 1c"
+          bg="WindowFrame"
+          color="white"
+        >
+          Pedidos
+        </Text>
+      </HStack>
 
       <Wrap
         justify="center"
         h="85%"
-        w={switchWidth()}
+        w={{ base: "100%", md: "90%" }}
         overflowY="auto"
         overflowX="hidden"
       >
@@ -110,14 +108,14 @@ function Orders() {
           <Flex w="100%">
             <Accordion allowToggle w="100%" overflowY="hidden">
               {ordersLoadingStatus == 200 &&
-                items.map((order: orderType) => (
+                items?.map((order: orderType) => (
                   <OrderCard key={order._id} properties={order} />
                 ))}
             </Accordion>
           </Flex>
         </WrapItem>
       </Wrap>
-    </>
+    </VStack>
   );
 }
 
