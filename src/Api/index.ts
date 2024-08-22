@@ -3,7 +3,7 @@ import axios from "axios";
 const development = false;
 
 const baseurl = development
-  ? "http://localhost:3333/"
+  ? "http://localhost:3333"
   : "https://fifty-cents-store-back.onrender.com/";
 
 export const order = axios.create({
@@ -33,3 +33,43 @@ export const items = axios.create({
     "Content-Type": "application/json;charset=utf-8",
   },
 });
+
+export const api = axios.create({
+  baseURL: baseurl,
+  headers: {
+    "Content-Type": "application/json;charset=utf-8",
+  },
+});
+
+export interface productsFiltersProps {
+  id?: string;
+  locale?: string;
+  material?: string[];
+  category?: string[];
+  search?: string;
+  orderlyBy?: string;
+}
+
+export const productsApi = {
+  async getProducts({
+    locale,
+    material,
+    category,
+    search,
+    orderlyBy,
+    id,
+  }: productsFiltersProps) {
+    const { data } = await api.get("items", {
+      params: {
+        locale,
+        material,
+        category,
+        search,
+        orderlyBy,
+        id,
+      },
+    });
+
+    return data || [];
+  },
+};
