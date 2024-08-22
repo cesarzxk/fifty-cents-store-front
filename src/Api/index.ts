@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const development = true;
+const development = false;
 
 const baseurl = development
   ? "http://localhost:3333"
