@@ -4,13 +4,12 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
-  CircularProgress,
-  Center,
   Button,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useNavigate } from "react-router-dom";
+import { Loading } from "../../Components/Loading";
 
 import { useGlobal } from "../../Context/Global/GlobalContext";
 import useDimensions from "../../Hooks/useDimensions";
@@ -95,9 +94,7 @@ function Checkout() {
   }
 
   return status == 0 ? (
-    <Center w="100%" flex={6}>
-      <CircularProgress size="100px" isIndeterminate color="yellow" />
-    </Center>
+    <Loading />
   ) : (
     <Wrap
       justify="center"
