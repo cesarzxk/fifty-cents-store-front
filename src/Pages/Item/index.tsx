@@ -21,25 +21,26 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { useGlobal } from "../../Context/Global/GlobalContext";
+import { useGetProducts } from "../../Hooks/useGetProducts";
 
 function Item() {
   let { slug } = useParams<"slug">();
-  const { getItem, addItemtoCart } = useGlobal();
-  const [item, setItem] = useState<any>();
+  const { addItemtoCart } = useGlobal();
   const navigate = useNavigate();
+  const [id, locale] = slug?.split("-") || ["", ""];
+  const { data: item, isLoading } = useGetProducts({ id, locale });
 
-  useEffect(() => {
-    onload();
-  }, []);
+  // useEffect(() => {
+  //   onload();
+  // }, []);
 
-  async function onload() {
-    if (slug) {
-      const [id, locale] = slug.split("-");
-      const data = await getItem(locale, id);
-      setItem(data);
-      console.log(data);
-    }
-  }
+  // async function onload() {
+  //   if (slug) {
+  //     const data = await getItem(locale, id);
+  //     setItem(data);
+  //     console.log(data);
+  //   }
+  // }
 
   return !item ? (
     <Center w="100%" flex={6}>
@@ -63,14 +64,15 @@ function Item() {
             fontWeight="bold"
             marginLeft="1rem"
             fontFamily="Rounded Mplus 1c"
+            color="white"
           >
             {item?.name}
           </Text>
         </HStack>
 
         <Wrap w="100%" justify="center">
-          <Flex>
-            <Carousel width="300px" infiniteLoop>
+          <Flex width={{ base: "100%", md: "300px" }}>
+            <Carousel width="100%" infiniteLoop>
               {item.images?.map((image: string) => {
                 return <Image src={image} />;
               })}
@@ -80,7 +82,13 @@ function Item() {
             )}
           </Flex>
           <Spacer maxWidth="1rem" />
-          <Flex w="20rem" h="12.5rem" justifyContent="center" flexDir="column">
+
+          <Flex
+            w={{ base: "100%", md: "20rem" }}
+            h="12.5rem"
+            justifyContent="center"
+            flexDir="column"
+          >
             <Grid gridTemplateColumns="1fr 1fr">
               <GridItem>
                 <Text>Cod:</Text>
