@@ -7,28 +7,24 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import Filters from "../../Components/Filters";
+import { useGlobal } from "../../Context/Global/GlobalContext";
 
 function DrawerFilter() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  return (
-    <>
-      <Button
-        h="100%"
-        w="1rem"
-        data-testid="drawerFilterButton"
-        onClick={onOpen}
-      >
-        {">"}
-      </Button>
+  const { isFiltersOpen, onFiltersClose } = useGlobal();
 
-      <Drawer size="lg" placement="left" onClose={onClose} isOpen={isOpen}>
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <Filters />
-        </DrawerContent>
-      </Drawer>
-    </>
+  return (
+    <Drawer
+      size="sm"
+      placement="left"
+      onClose={onFiltersClose}
+      isOpen={isFiltersOpen}
+    >
+      <DrawerOverlay />
+      <DrawerContent>
+        <DrawerCloseButton color="White" />
+        <Filters />
+      </DrawerContent>
+    </Drawer>
   );
 }
 export default DrawerFilter;
