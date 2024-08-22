@@ -29,14 +29,13 @@ function User() {
       <PopoverTrigger>
         <IconButton
           aria-label=""
-          borderRadius={100}
-          h={47.988}
-          w={47.988}
-          bg="#000"
+          borderRadius={30}
+          bg="black"
           icon={
             <Avatar
-              size="md"
-              bg="#000ff"
+              w="2.5rem"
+              h="2.5rem"
+              bg="black"
               color="yellow"
               data-testis="avatar"
               name={`${userInfo?.name} ${userInfo?.lastname}`}
